@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{73C8166B-D0CF-4563-9A2E-490D96A6B1F4}</ProjectGuid>
+    <ProjectGuid>{097A14FA-A606-498E-99A7-C973EEE40DA0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Executores</RootNamespace>
-    <AssemblyName>Executores</AssemblyName>
+    <RootNamespace>Executores.Mongo</RootNamespace>
+    <AssemblyName>Executores.Mongo</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,7 +30,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MongoDB.Bson">
+      <HintPath>..\packages\mongocsharpdriver.1.8.3\lib\net35\MongoDB.Bson.dll</HintPath>
+    </Reference>
+    <Reference Include="MongoDB.Driver">
+      <HintPath>..\packages\mongocsharpdriver.1.8.3\lib\net35\MongoDB.Driver.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -39,17 +46,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bus\Bus.cs" />
-    <Compile Include="Bus\CodeMessageBus.cs" />
-    <Compile Include="Bus\IInstructionBus.cs" />
-    <Compile Include="Bus\IMessageBus.cs" />
-    <Compile Include="Bus\IReponseInstructionBus.cs" />
-    <Compile Include="Constats\Constat.cs" />
-    <Compile Include="Entrepots\IAgregat.cs" />
-    <Compile Include="Entrepots\IEntrepot.cs" />
-    <Compile Include="Entrepots\IEntrepotConstat.cs" />
-    <Compile Include="Entrepots\IFournisseur.cs" />
+    <Compile Include="FournisseurMongo.cs" />
+    <Compile Include="MappingMongo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Executores\Executores.csproj">
+      <Project>{73c8166b-d0cf-4563-9a2e-490d96a6b1f4}</Project>
+      <Name>Executores</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

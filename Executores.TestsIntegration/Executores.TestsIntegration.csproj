@@ -3,18 +3,18 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9006A9B5-B6A6-42FD-86D6-0BB347AC50A8}</ProjectGuid>
+    <ProjectGuid>{949189D1-B398-4D30-BBE8-D4F1F36DD7ED}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Executores.TestsUnitaires</RootNamespace>
-    <AssemblyName>Executores.TestsUnitaires</AssemblyName>
+    <RootNamespace>Executores.TestsIntegration</RootNamespace>
+    <AssemblyName>Executores.TestsIntegration</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
     <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
-    <IsCodedUITest>False</IsCodedUITest>
+    <IsCodedUITest>True</IsCodedUITest>
     <TestProjectType>UnitTest</TestProjectType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -35,9 +35,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Ninject">
-      <HintPath>..\packages\Ninject.3.0.1.10\lib\net45-full\Ninject.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <Choose>
@@ -54,45 +51,22 @@
   </Choose>
   <ItemGroup>
     <Compile Include="AgregatMock.cs" />
-    <Compile Include="Domaine\Bus\BusMock.cs" />
-    <Compile Include="Domaine\Bus\IMauvaisMessageBusMock.cs" />
-    <Compile Include="Domaine\Bus\IMessageBusMock.cs" />
-    <Compile Include="Domaine\Bus\IMessageBusTest.cs" />
-    <Compile Include="Domaine\Bus\InstructionMock.cs" />
-    <Compile Include="Domaine\Bus\MauvaisMessageBusMock.cs" />
-    <Compile Include="Domaine\Bus\ReponseBusMock.cs" />
-    <Compile Include="Domaine\Bus\MessageBusMock.cs" />
-    <Compile Include="Domaine\Bus\TestBus.cs" />
-    <Compile Include="Domaine\Commandes\Constats\TestCreerConstatCommande.cs" />
-    <Compile Include="Domaine\Requetes\Constats\TestChargerConstatRequete.cs" />
-    <Compile Include="Entrepots\EntrepotMock.cs" />
-    <Compile Include="Entrepots\TestEntrepot.cs" />
-    <Compile Include="Entrepots\TestFabriqueEntrepot.cs" />
-    <Compile Include="FournisseurMock.cs" />
-    <Compile Include="ModuleEntrepotMock.cs" />
+    <Compile Include="Mongo\TestFournisseurMongo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestFournisseurMock.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Executores.Commandes\Executores.Commandes.csproj">
-      <Project>{b0fce256-98ab-4473-b96e-062d8933dac0}</Project>
-      <Name>Executores.Commandes</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Executores.Entrepots\Executores.Entrepots.csproj">
-      <Project>{aef0f830-66be-4bad-9b70-aa24714595a2}</Project>
-      <Name>Executores.Entrepots</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Executores.Requetes\Executores.Requetes.csproj">
-      <Project>{3025ce5d-9276-4cd4-af83-294e1d349a2d}</Project>
-      <Name>Executores.Requetes</Name>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Executores.Mongo\Executores.Mongo.csproj">
+      <Project>{097a14fa-a606-498e-99a7-c973eee40da0}</Project>
+      <Name>Executores.Mongo</Name>
     </ProjectReference>
     <ProjectReference Include="..\Executores\Executores.csproj">
       <Project>{73c8166b-d0cf-4563-9a2e-490d96a6b1f4}</Project>
       <Name>Executores</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
