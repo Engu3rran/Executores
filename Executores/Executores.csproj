@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Ninject">
+      <HintPath>..\packages\Ninject.3.2.0.0\lib\net45-full\Ninject.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -39,17 +42,45 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bus\Bus.cs" />
-    <Compile Include="Bus\CodeMessageBus.cs" />
-    <Compile Include="Bus\IInstructionBus.cs" />
-    <Compile Include="Bus\IMessageBus.cs" />
-    <Compile Include="Bus\IReponseInstructionBus.cs" />
-    <Compile Include="Constats\Constat.cs" />
-    <Compile Include="Entrepots\IAgregat.cs" />
-    <Compile Include="Entrepots\IEntrepot.cs" />
-    <Compile Include="Entrepots\IEntrepotConstat.cs" />
-    <Compile Include="Entrepots\IFournisseur.cs" />
+    <Compile Include="Bus\Ecriture\BusCommande.cs" />
+    <Compile Include="Bus\Ecriture\Commandes\Commande.cs" />
+    <Compile Include="Bus\Ecriture\IMessageCommande.cs" />
+    <Compile Include="Bus\Ecriture\ReponseCommande.cs" />
+    <Compile Include="Bus\Instructions\Bus.cs" />
+    <Compile Include="Bus\Instructions\CodeMessageBus.cs" />
+    <Compile Include="Bus\Instructions\IInstructionBus.cs" />
+    <Compile Include="Bus\Instructions\IMessageBus.cs" />
+    <Compile Include="Bus\Instructions\IReponseInstructionBus.cs" />
+    <Compile Include="Bus\Instructions\ValidationFormulaire.cs" />
+    <Compile Include="Bus\Lecture\BusRequete.cs" />
+    <Compile Include="Bus\Lecture\IMessageRequete.cs" />
+    <Compile Include="Bus\Lecture\ReponseRequete.cs" />
+    <Compile Include="Bus\Lecture\Requetes\Requete.cs" />
+    <Compile Include="Chiffrement\ChiffrementAES.cs" />
+    <Compile Include="DDD\ObjetsValeur\ObjetValeur.cs" />
+    <Compile Include="Domaine\Constats\Constat.cs" />
+    <Compile Include="Domaine\Constats\Fichier.cs" />
+    <Compile Include="DDD\Agregats\Agregat.cs" />
+    <Compile Include="DDD\Agregats\IAgregat.cs" />
+    <Compile Include="DDD\Entrepots\IEntrepotPersistance.cs" />
+    <Compile Include="Domaine\Utilisateurs\AdresseEmail.cs" />
+    <Compile Include="Domaine\Utilisateurs\MotDePasse.cs" />
+    <Compile Include="Domaine\Validation\VALIDATION.cs" />
+    <Compile Include="Exceptions\ExceptionPersonnalise.cs" />
+    <Compile Include="Exceptions\InjectionException.cs" />
+    <Compile Include="Exceptions\PersistanceException.cs" />
+    <Compile Include="DDD\Fabriques\Fabrique.cs" />
+    <Compile Include="Extensions\PropertyName.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Bus\Ecriture\Commandes\Constats\" />
+    <Folder Include="Bus\Ecriture\Messages\Constats\" />
+    <Folder Include="Bus\Lecture\Messages\Constats\" />
+    <Folder Include="Bus\Lecture\Requetes\Constats\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

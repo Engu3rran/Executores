@@ -45,16 +45,14 @@
     <Compile Include="BusRequete.cs" />
     <Compile Include="IMessageRequete.cs" />
     <Compile Include="Messages\Constats\IChargerConstatMessageRequete.cs" />
+    <Compile Include="Messages\Constats\IRecupererFichierConstatMessageRequete.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReponseRequete.cs" />
     <Compile Include="Requetes\Constats\ChargerConstatRequete.cs" />
+    <Compile Include="Requetes\Constats\RecupererFichierConstatRequete.cs" />
     <Compile Include="Requetes\Requete.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Executores.Entrepots\Executores.Entrepots.csproj">
-      <Project>{aef0f830-66be-4bad-9b70-aa24714595a2}</Project>
-      <Name>Executores.Entrepots</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Executores\Executores.csproj">
       <Project>{73c8166b-d0cf-4563-9a2e-490d96a6b1f4}</Project>
       <Name>Executores</Name>

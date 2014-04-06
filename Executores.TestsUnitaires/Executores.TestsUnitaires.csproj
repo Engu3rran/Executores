@@ -35,6 +35,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CsQuery">
+      <HintPath>..\packages\CsQuery.1.3.4\lib\net40\CsQuery.dll</HintPath>
+    </Reference>
+    <Reference Include="Nancy">
+      <HintPath>..\packages\Nancy.0.22.0\lib\net40\Nancy.dll</HintPath>
+    </Reference>
+    <Reference Include="Nancy.Testing">
+      <HintPath>..\packages\Nancy.Testing.0.22.0\lib\net40\Nancy.Testing.dll</HintPath>
+    </Reference>
     <Reference Include="Ninject">
       <HintPath>..\packages\Ninject.3.0.1.10\lib\net45-full\Ninject.dll</HintPath>
     </Reference>
@@ -53,38 +62,22 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="AgregatMock.cs" />
-    <Compile Include="Domaine\Bus\BusMock.cs" />
-    <Compile Include="Domaine\Bus\IMauvaisMessageBusMock.cs" />
-    <Compile Include="Domaine\Bus\IMessageBusMock.cs" />
-    <Compile Include="Domaine\Bus\IMessageBusTest.cs" />
-    <Compile Include="Domaine\Bus\InstructionMock.cs" />
-    <Compile Include="Domaine\Bus\MauvaisMessageBusMock.cs" />
-    <Compile Include="Domaine\Bus\ReponseBusMock.cs" />
-    <Compile Include="Domaine\Bus\MessageBusMock.cs" />
-    <Compile Include="Domaine\Bus\TestBus.cs" />
-    <Compile Include="Domaine\Commandes\Constats\TestCreerConstatCommande.cs" />
-    <Compile Include="Domaine\Requetes\Constats\TestChargerConstatRequete.cs" />
-    <Compile Include="Entrepots\EntrepotMock.cs" />
-    <Compile Include="Entrepots\TestEntrepot.cs" />
-    <Compile Include="Entrepots\TestFabriqueEntrepot.cs" />
-    <Compile Include="FournisseurMock.cs" />
-    <Compile Include="ModuleEntrepotMock.cs" />
+    <Compile Include="DDD\ObjetsValeur\ObjetValeurMock.cs" />
+    <Compile Include="DDD\ObjetsValeur\UnitTest1.cs" />
+    <Compile Include="Domaine\Utilisateurs\TestMotDePasse.cs" />
+    <Compile Include="DDD\Agregats\AgregatMock.cs" />
+    <Compile Include="Domaine\Constats\TestFichier.cs" />
+    <Compile Include="Mock\EntrepotMock.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestFournisseurMock.cs" />
+    <Compile Include="Mock\TestFournisseurMock.cs" />
+    <Compile Include="TEST.cs" />
+    <Compile Include="Web\BootstrapperTest.cs" />
+    <Compile Include="Web\TestScenarioConstat.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Executores.Commandes\Executores.Commandes.csproj">
-      <Project>{b0fce256-98ab-4473-b96e-062d8933dac0}</Project>
-      <Name>Executores.Commandes</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Executores.Entrepots\Executores.Entrepots.csproj">
-      <Project>{aef0f830-66be-4bad-9b70-aa24714595a2}</Project>
-      <Name>Executores.Entrepots</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Executores.Requetes\Executores.Requetes.csproj">
-      <Project>{3025ce5d-9276-4cd4-af83-294e1d349a2d}</Project>
-      <Name>Executores.Requetes</Name>
+    <ProjectReference Include="..\Executores.Web\Executores.Web.csproj">
+      <Project>{0376dcad-98fa-4280-987b-0e2a8cec73ac}</Project>
+      <Name>Executores.Web</Name>
     </ProjectReference>
     <ProjectReference Include="..\Executores\Executores.csproj">
       <Project>{73c8166b-d0cf-4563-9a2e-490d96a6b1f4}</Project>
@@ -93,6 +86,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Domaine\Bus\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

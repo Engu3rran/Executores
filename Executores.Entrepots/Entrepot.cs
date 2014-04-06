@@ -5,9 +5,9 @@ namespace Executores.Entrepots
 {
     public abstract class Entrepot<T> : IEntrepot<T> where T : IAgregat
     {
-        protected IFournisseur _fournisseur;
+        protected IEntrepotPersistance _fournisseur;
 
-        public Entrepot(IFournisseur fournisseur)
+        public Entrepot(IEntrepotPersistance fournisseur)
         {
             _fournisseur = fournisseur;
             _fournisseur.connecter();

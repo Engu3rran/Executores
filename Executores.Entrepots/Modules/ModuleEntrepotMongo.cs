@@ -7,7 +7,7 @@ namespace Executores.Entrepots
         public override void Load()
         {
             chargerLesEntrepots();
-            this.Bind<IFournisseur>().To<FournisseurMongo>().InSingletonScope();
+            this.Bind<IEntrepotPersistance>().To<FournisseurMongo>().InSingletonScope();
         }
     }
 }

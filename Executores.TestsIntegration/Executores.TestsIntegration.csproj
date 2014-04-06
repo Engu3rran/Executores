@@ -35,15 +35,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CsQuery">
-      <HintPath>..\packages\CsQuery.1.3.4\lib\net40\CsQuery.dll</HintPath>
-    </Reference>
-    <Reference Include="Nancy">
-      <HintPath>..\packages\Nancy.0.22.0\lib\net40\Nancy.dll</HintPath>
-    </Reference>
-    <Reference Include="Nancy.Testing">
-      <HintPath>..\packages\Nancy.Testing.0.22.0\lib\net40\Nancy.Testing.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <Choose>
@@ -62,25 +53,15 @@
     <Compile Include="AgregatMock.cs" />
     <Compile Include="Mongo\TestFournisseurMongo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Web\UnitTest1.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\Executores.Commandes\Executores.Commandes.csproj">
-      <Project>{b0fce256-98ab-4473-b96e-062d8933dac0}</Project>
-      <Name>Executores.Commandes</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Executores.Mongo\Executores.Mongo.csproj">
       <Project>{097a14fa-a606-498e-99a7-c973eee40da0}</Project>
       <Name>Executores.Mongo</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Executores.Requetes\Executores.Requetes.csproj">
-      <Project>{3025ce5d-9276-4cd4-af83-294e1d349a2d}</Project>
-      <Name>Executores.Requetes</Name>
     </ProjectReference>
     <ProjectReference Include="..\Executores.Web\Executores.Web.csproj">
       <Project>{0376dcad-98fa-4280-987b-0e2a8cec73ac}</Project>

@@ -10,14 +10,15 @@ namespace Executores.Requetes
         {
             _listeDesInstructions = new List<IInstructionBus>();
             _listeDesInstructions.Add(new ChargerConstatRequete());
+            _listeDesInstructions.Add(new RecupererFichierConstatRequete());
         }
 
-        public void utiliserMongo()
+        public static void utiliserMongo()
         {
             FabriqueEntrepot.chargerUnModule(new ModuleEntrepotMongo());
         }
 
-        public void utiliserUnModule(ModuleEntrepot module)
+        public static void utiliserUnModule(ModuleEntrepot module)
         {
             FabriqueEntrepot.chargerUnModule(module);
         }

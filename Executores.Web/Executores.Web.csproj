@@ -67,10 +67,9 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Api\Messages\Commandes\CreerConstatMessage.cs" />
-    <Compile Include="Api\Messages\Requetes\ChargerConstatMessage.cs" />
     <Compile Include="Api\Modules\ModuleAPI.cs" />
     <Compile Include="Api\Modules\ModuleConstatAPI.cs" />
+    <Compile Include="Bootstrapper.cs" />
     <Compile Include="Modules\ModuleConstat.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -84,20 +83,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Executores.Commandes\Executores.Commandes.csproj">
-      <Project>{b0fce256-98ab-4473-b96e-062d8933dac0}</Project>
-      <Name>Executores.Commandes</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Executores.Requetes\Executores.Requetes.csproj">
-      <Project>{3025ce5d-9276-4cd4-af83-294e1d349a2d}</Project>
-      <Name>Executores.Requetes</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Executores\Executores.csproj">
       <Project>{73C8166B-D0CF-4563-9A2E-490D96A6B1F4}</Project>
       <Name>Executores</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Api\Messages\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
