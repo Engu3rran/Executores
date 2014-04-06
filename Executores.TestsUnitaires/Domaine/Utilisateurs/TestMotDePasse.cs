@@ -1,7 +1,6 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Executores.TestsUnitaires.Domaine.Utilisateurs
+namespace Executores.TestsUnitaires
 {
     [TestClass]
     public class TestMotDePasse

@@ -4,7 +4,7 @@ using System.IO;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Executores.TestsUnitaires.Domaine.Constats
+namespace Executores.TestsUnitaires
 {
     [TestClass]
     public class TestFichier

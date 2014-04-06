@@ -3,15 +3,30 @@ namespace Executores
 {
     public class VALIDATION
     {
+        //Domaine
         public const int CHAINE_LONGUEUR_MAX = 256;
 
+        //Adresse
+        public static readonly Erreur REQUIS_VOIE = new Erreur("007", "La voie est requise");
+        public static readonly Erreur LONGUEUR_VOIE = new Erreur("008", "La voie doit faire moins de " + CHAINE_LONGUEUR_MAX + " caractères");
+        public static readonly Erreur LONGUEUR_COMPLEMENT = new Erreur("009", "Le complément doit faire moins de " + CHAINE_LONGUEUR_MAX + " caractères");
+        public static readonly Erreur REQUIS_CODE_POSTAL = new Erreur("004", "Le code postal est requis");
+        public static readonly Erreur LONGUEUR_CODE_POSTAL = new Erreur("005", "Le code postal doit faire moins de " + CHAINE_LONGUEUR_MAX + " caractères");
+        public static readonly Erreur INVALIDE_CODE_POSTAL = new Erreur("006", "Le code postal est invalide");
+        public static readonly Erreur REQUIS_COMMUNE = new Erreur("010", "La commune est requise");
+        public static readonly Erreur LONGUEUR_COMMUNE = new Erreur("011", "La commune doit faire moins de " + CHAINE_LONGUEUR_MAX + " caractères");
+
+        //Entreprise
+        public static readonly Erreur REQUIS_NUMERO_SIRET = new Erreur("001", "Le numéro SIRET est requis");
+        public static readonly Erreur LONGUEUR_NUMERO_SIRET = new Erreur("002", "Le numéro SIRET doit faire moins de " + CHAINE_LONGUEUR_MAX + " caractères");
+        public static readonly Erreur INVALIDE_NUMERO_SIRET = new Erreur("003", "Le numéro SIRET est invalide");
+
         //Utilisateurs
-        public const int MOT_DE_PASSE_LONGUEUR_MIN = 8;
-        public const string REQUIS_MOT_DE_PASSE = "101";
-        public const string LONGUEUR_MOT_DE_PASSE = "102";
-        public const string COMPLEXITE_MOT_DE_PASSE = "103";
-        public const string REQUIS_ADRESSE_EMAIL = "104";
-        public const string LONGUEUR_ADRESSE_EMAIL = "105";
-        public const string INVALIDE_ADRESSE_EMAIL = "106";
+        public static readonly Erreur REQUIS_MOT_DE_PASSE = new Erreur("101", "Le mot de passe est requis");
+        public static readonly Erreur LONGUEUR_MOT_DE_PASSE = new Erreur("102", "Le mot de passe doit avoir une longueur comprise entre " + MotDePasse.MOT_DE_PASSE_LONGUEUR_MIN + " et " + CHAINE_LONGUEUR_MAX + " caractères");
+        public static readonly Erreur COMPLEXITE_MOT_DE_PASSE = new Erreur("103", "Le mot de passe doit contenir au moins une lettre minuscule, une lettre majuscule, un chiffre et un caractère spécial");
+        public static readonly Erreur REQUIS_ADRESSE_EMAIL = new Erreur("104", "L'adresse e-mail est requise");
+        public static readonly Erreur LONGUEUR_ADRESSE_EMAIL = new Erreur("105", "L'adresse e-mail doit faire moins de " + CHAINE_LONGUEUR_MAX + " caractères");
+        public static readonly Erreur INVALIDE_ADRESSE_EMAIL = new Erreur("106", "L'adresse e-mail est invalide");
     }
 }

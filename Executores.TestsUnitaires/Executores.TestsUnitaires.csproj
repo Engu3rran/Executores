@@ -63,13 +63,17 @@
   </Choose>
   <ItemGroup>
     <Compile Include="DDD\ObjetsValeur\ObjetValeurMock.cs" />
-    <Compile Include="DDD\ObjetsValeur\UnitTest1.cs" />
+    <Compile Include="DDD\ObjetsValeur\TestObjetValeur.cs" />
+    <Compile Include="Domaine\Adresses\TestCodePostal.cs" />
+    <Compile Include="Domaine\Adresses\TestAdressePostale.cs" />
+    <Compile Include="Domaine\Entreprises\TestNumeroSIRET.cs" />
     <Compile Include="Domaine\Utilisateurs\TestMotDePasse.cs" />
     <Compile Include="DDD\Agregats\AgregatMock.cs" />
     <Compile Include="Domaine\Constats\TestFichier.cs" />
-    <Compile Include="Mock\EntrepotMock.cs" />
+    <Compile Include="DDD\Entrepots\EntrepotMock.cs" />
+    <Compile Include="Domaine\Utilisateurs\TestAdresseEmail.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Mock\TestFournisseurMock.cs" />
+    <Compile Include="DDD\Entrepots\TestEntrepotMock.cs" />
     <Compile Include="TEST.cs" />
     <Compile Include="Web\BootstrapperTest.cs" />
     <Compile Include="Web\TestScenarioConstat.cs" />
@@ -87,9 +91,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Domaine\Bus\" />
-  </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

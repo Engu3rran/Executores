@@ -2,7 +2,7 @@
 
 namespace Executores
 {
-    public class AdresseEmail : ObjetValeur
+    public class AdresseEmail : ObjetValeur, IObjetValeurValidable
     {
         public AdresseEmail() : base() { }
 
@@ -41,16 +41,15 @@ namespace Executores
             return true; 
         }
 
-        public string donnerLErreur()
+        public Erreur donnerLErreur()
         {
-            string message = string.Empty;
             if (!estRenseignée())
                 return VALIDATION.REQUIS_ADRESSE_EMAIL;
             if (!aLaBonneLongueur())
                 return VALIDATION.LONGUEUR_ADRESSE_EMAIL;
             if (!aLeBonFormat())
                 return VALIDATION.INVALIDE_ADRESSE_EMAIL;
-            return message;
+            return null;
         }
     }
 }
