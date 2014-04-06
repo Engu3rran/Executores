@@ -8,13 +8,6 @@ namespace Executores.Mongo
     {
         public void enregistrer()
         {
-            enregistrerLesConstats();
-        }
-
-        private void enregistrerLesConstats()
-        {
-            if (!BsonClassMap.IsClassMapRegistered(typeof(Constat)))
-                BsonClassMap.RegisterClassMap<Constat>();
         }
     }
 }

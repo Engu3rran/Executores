@@ -70,25 +70,25 @@ namespace Executores.Mongo
             return typeof(T).GetTypeInfo().Name;
         }
 
-        public void insérer(IAgregat agrégat)
+        public void insérer<T>(IAgregat agrégat) where T : IAgregat
         {
             agrégat.DateCréation = DateTime.Now;
             enregistrerLAgrégat(agrégat);
         }
 
-        public void modifier(IAgregat agrégat)
+        public void modifier<T>(IAgregat agrégat) where T : IAgregat
         {
             agrégat.DateModification = DateTime.Now;
             enregistrerLAgrégat(agrégat);
         }
 
-        public void archiver(IAgregat agrégat)
+        public void archiver<T>(IAgregat agrégat) where T : IAgregat
         {
             agrégat.DateArchivage = DateTime.Now;
             enregistrerLAgrégat(agrégat);
         }
 
-        public void désarchiver(IAgregat agrégat)
+        public void désarchiver<T>(IAgregat agrégat) where T : IAgregat
         {
             agrégat.DateArchivage = null;
             enregistrerLAgrégat(agrégat);
@@ -109,7 +109,7 @@ namespace Executores.Mongo
             }
         }
 
-        public void supprimer(IAgregat agrégat)
+        public void supprimer<T>(IAgregat agrégat) where T : IAgregat
         {
             try
             {

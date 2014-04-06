@@ -1,9 +1,8 @@
 ﻿
 namespace Executores
 {
-    public class Cabinet
+    public class Cabinet : Entreprise
     {
-        public NumeroSIRET NuméroSIRET { get; set; }
-        public string Nom { get; set; }
+        public Cabinet(IEntrepotPersistance entrepot) : base(entrepot) { }
     }
 }

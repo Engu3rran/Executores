@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 
 namespace Executores.TestsUnitaires
 {
@@ -15,18 +16,12 @@ namespace Executores.TestsUnitaires
         }
 
         [TestMethod]
-        public void TestEntrepotMock_peutSeConnecter()
-        {
-            Assert.IsTrue(_entrepot.EstConnecté);
-        }
-
-        [TestMethod]
         public void TestEntrepotMock_peutinsérerUnAgrégat()
         {
-            int nombreInitial = _entrepot.prendreLaCollection<AgregatMock>().Count();
-            AgregatMock agrégat = new AgregatMock();
-            _entrepot.insérer(agrégat);
-            int nombreFinal = _entrepot.prendreLaCollection<AgregatMock>().Count();
+            int nombreInitial = _entrepot.prendreLaCollection<IAgregat>().Count();
+            IAgregat agrégat = Mock.Of<IAgregat>();
+            _entrepot.insérer<IAgregat>(agrégat);
+            int nombreFinal = _entrepot.prendreLaCollection<IAgregat>().Count();
             Assert.AreEqual(nombreInitial + 1, nombreFinal);
             Assert.IsNotNull(agrégat.DateCréation);
         }
@@ -34,11 +29,11 @@ namespace Executores.TestsUnitaires
         [TestMethod]
         public void TestEntrepotMock_peutModifierUnAgrégat()
         {
-            AgregatMock agrégat = new AgregatMock();
-            _entrepot.insérer(agrégat);
+            IAgregat agrégat = Mock.Of<IAgregat>();
+            _entrepot.insérer<IAgregat>(agrégat);
             Assert.IsNull(agrégat.DateModification);
-            _entrepot.modifier(agrégat);
-            AgregatMock agrégatRécupéré = _entrepot.prendreLaCollection<AgregatMock>().SingleOrDefault(x => x.Id.Equals(agrégat.Id));
+            _entrepot.modifier<IAgregat>(agrégat);
+            IAgregat agrégatRécupéré = _entrepot.prendreLaCollection<IAgregat>().SingleOrDefault(x => x.Id.Equals(agrégat.Id));
             Assert.IsNotNull(agrégatRécupéré);
             Assert.IsNotNull(agrégatRécupéré.DateModification);
         }
@@ -46,11 +41,11 @@ namespace Executores.TestsUnitaires
         [TestMethod]
         public void TestEntrepotMock_peutArchiverUnAgrégat()
         {
-            AgregatMock agrégat = new AgregatMock();
-            _entrepot.insérer(agrégat);
+            IAgregat agrégat = Mock.Of<IAgregat>();
+            _entrepot.insérer<IAgregat>(agrégat);
             Assert.IsNull(agrégat.DateArchivage);
-            _entrepot.archiver(agrégat);
-            AgregatMock agrégatRécupéré = _entrepot.prendreLaCollection<AgregatMock>().SingleOrDefault(x => x.Id.Equals(agrégat.Id));
+            _entrepot.archiver<IAgregat>(agrégat);
+            IAgregat agrégatRécupéré = _entrepot.prendreLaCollection<IAgregat>().SingleOrDefault(x => x.Id.Equals(agrégat.Id));
             Assert.IsNotNull(agrégatRécupéré);
             Assert.IsNotNull(agrégatRécupéré.DateArchivage);
         }
@@ -58,11 +53,11 @@ namespace Executores.TestsUnitaires
         [TestMethod]
         public void TestEntrepotMock_peutDésarchiverUnAgrégat()
         {
-            AgregatMock agrégat = new AgregatMock();
-            _entrepot.insérer(agrégat);
-            _entrepot.archiver(agrégat);
-            _entrepot.désarchiver(agrégat);
-            AgregatMock agrégatRécupéré = _entrepot.prendreLaCollection<AgregatMock>().SingleOrDefault(x => x.Id.Equals(agrégat.Id));
+            IAgregat agrégat = Mock.Of<IAgregat>();
+            _entrepot.insérer<IAgregat>(agrégat);
+            _entrepot.archiver<IAgregat>(agrégat);
+            _entrepot.désarchiver<IAgregat>(agrégat);
+            IAgregat agrégatRécupéré = _entrepot.prendreLaCollection<IAgregat>().SingleOrDefault(x => x.Id.Equals(agrégat.Id));
             Assert.IsNotNull(agrégatRécupéré);
             Assert.IsNull(agrégat.DateArchivage);
         }
@@ -70,10 +65,10 @@ namespace Executores.TestsUnitaires
         [TestMethod]
         public void TestEntrepotMock_peutSupprimerUnAgrégat()
         {
-            AgregatMock agrégat = new AgregatMock();
-            _entrepot.insérer(agrégat);
-            _entrepot.supprimer(agrégat);
-            AgregatMock agrégatRécupéré = _entrepot.prendreLaCollection<AgregatMock>().SingleOrDefault(x => x.Id.Equals(agrégat.Id));
+            IAgregat agrégat = Mock.Of<IAgregat>();
+            _entrepot.insérer<IAgregat>(agrégat);
+            _entrepot.supprimer<IAgregat>(agrégat);
+            IAgregat agrégatRécupéré = _entrepot.prendreLaCollection<IAgregat>().SingleOrDefault(x => x.Id.Equals(agrégat.Id));
             Assert.IsNull(agrégatRécupéré);
         }
     }

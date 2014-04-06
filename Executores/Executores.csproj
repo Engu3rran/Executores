@@ -60,12 +60,12 @@
     <Compile Include="DDD\ObjetsValeur\ObjetValeur.cs" />
     <Compile Include="Domaine\Adresses\AdressePostale.cs" />
     <Compile Include="Domaine\Adresses\CodePostal.cs" />
-    <Compile Include="Domaine\Constats\Constat.cs" />
-    <Compile Include="Domaine\Constats\Fichier.cs" />
+    <Compile Include="Domaine\Adresses\IAdresseMessage.cs" />
     <Compile Include="DDD\Agregats\Agregat.cs" />
     <Compile Include="DDD\Agregats\IAgregat.cs" />
     <Compile Include="DDD\Entrepots\IEntrepotPersistance.cs" />
     <Compile Include="Domaine\Entreprises\Entreprise.cs" />
+    <Compile Include="Domaine\Entreprises\IEntrepriseMessage.cs" />
     <Compile Include="Domaine\Entreprises\NumeroSIRET.cs" />
     <Compile Include="Domaine\Utilisateurs\AdresseEmail.cs" />
     <Compile Include="Domaine\Utilisateurs\Cabinet\Cabinet.cs" />
@@ -86,6 +86,7 @@
     <Folder Include="Bus\Ecriture\Messages\Constats\" />
     <Folder Include="Bus\Lecture\Messages\Constats\" />
     <Folder Include="Bus\Lecture\Requetes\Constats\" />
+    <Folder Include="Domaine\Constats\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -38,17 +38,12 @@ namespace Executores.TestsUnitaires
             return éléments.AsQueryable<T>();
         }
 
-        private string trouverLeNomDeLaCollectionCorrespondante<T>()
-        {
-            return typeof(T).GetTypeInfo().Name;
-        }
-
-        public void insérer(IAgregat agrégat)
+        public void insérer<T>(IAgregat agrégat) where T : IAgregat
         {
             try
             {
                 agrégat.DateCréation = DateTime.Now;
-                string nomDeLaCollection = trouverLeNomDeLaCollectionCorrespondante(agrégat);
+                string nomDeLaCollection = trouverLeNomDeLaCollectionCorrespondante<T>();
                 if (_collections.ContainsKey(nomDeLaCollection))
                     ajouterALaCollection(agrégat, nomDeLaCollection);
                 _collections.Add(nomDeLaCollection, new List<IAgregat>());
@@ -73,12 +68,12 @@ namespace Executores.TestsUnitaires
                 throw new PersistanceException("Insertion impossible : Id déjà présent");
         }
 
-        public void modifier(IAgregat agrégat)
+        public void modifier<T>(IAgregat agrégat) where T : IAgregat
         {
             try
             {
                 agrégat.DateModification = DateTime.Now;
-                string nomDeLaCollection = trouverLeNomDeLaCollectionCorrespondante(agrégat);
+                string nomDeLaCollection = trouverLeNomDeLaCollectionCorrespondante<T>();
                 if (_collections.ContainsKey(nomDeLaCollection))
                     modifierLaCollection(agrégat, nomDeLaCollection);
                 else
@@ -90,12 +85,12 @@ namespace Executores.TestsUnitaires
             }
         }
 
-        public void archiver(IAgregat agrégat)
+        public void archiver<T>(IAgregat agrégat) where T : IAgregat
         {
             try
             {
                 agrégat.DateArchivage = DateTime.Now;
-                string nomDeLaCollection = trouverLeNomDeLaCollectionCorrespondante(agrégat);
+                string nomDeLaCollection = trouverLeNomDeLaCollectionCorrespondante<T>();
                 if (_collections.ContainsKey(nomDeLaCollection))
                     modifierLaCollection(agrégat, nomDeLaCollection);
                 else
@@ -107,12 +102,12 @@ namespace Executores.TestsUnitaires
             }
         }
 
-        public void désarchiver(IAgregat agrégat)
+        public void désarchiver<T>(IAgregat agrégat) where T : IAgregat
         {
             try
             {
                 agrégat.DateArchivage = null;
-                string nomDeLaCollection = trouverLeNomDeLaCollectionCorrespondante(agrégat);
+                string nomDeLaCollection = trouverLeNomDeLaCollectionCorrespondante<T>();
                 if (_collections.ContainsKey(nomDeLaCollection))
                     modifierLaCollection(agrégat, nomDeLaCollection);
                 else
@@ -136,11 +131,11 @@ namespace Executores.TestsUnitaires
                 throw new PersistanceException("Modification impossible : Id absent de la collection");
         }
 
-        public void supprimer(IAgregat agrégat)
+        public void supprimer<T>(IAgregat agrégat) where T : IAgregat
         {
             try
             {
-                string nomDeLaCollection = trouverLeNomDeLaCollectionCorrespondante(agrégat);
+                string nomDeLaCollection = trouverLeNomDeLaCollectionCorrespondante<T>();
                 if (_collections.ContainsKey(nomDeLaCollection))
                     supprimerDeLaCollection(agrégat, nomDeLaCollection);
                 else
@@ -164,9 +159,9 @@ namespace Executores.TestsUnitaires
                 throw new PersistanceException("Suppression impossible : Id absent de la collection");
         }
 
-        private string trouverLeNomDeLaCollectionCorrespondante(IAgregat agrégat)
+        private string trouverLeNomDeLaCollectionCorrespondante<T>()
         {
-            return agrégat.GetType().GetTypeInfo().Name;
+            return typeof(T).GetTypeInfo().Name;
         }
     }
 }

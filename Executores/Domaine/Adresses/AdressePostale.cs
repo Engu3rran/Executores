@@ -14,6 +14,14 @@ namespace Executores
         public CodePostal CodePostal { get; set; }
         public string Commune { get; set; }
 
+        public void modifier(IAdressePostaleMessage message)
+        {
+            Voie = message.Voie;
+            Complément = message.Complément;
+            CodePostal = new CodePostal(message.CodePostal);
+            Commune = message.Commune;
+        }
+
         public bool estValide()
         {
             return laVoieEstValide()

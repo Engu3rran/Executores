@@ -6,10 +6,10 @@ namespace Executores
     {
         bool EstConnecté { get;}
         IQueryable<T> prendreLaCollection<T>() where T : IAgregat;
-        void insérer(IAgregat agrégat);
-        void modifier(IAgregat agrégat);
-        void archiver(IAgregat agrégat);
-        void désarchiver(IAgregat agrégat);
-        void supprimer(IAgregat agrégat);
+        void insérer<T>(IAgregat agrégat) where T : IAgregat;
+        void modifier<T>(IAgregat agrégat) where T : IAgregat;
+        void archiver<T>(IAgregat agrégat) where T : IAgregat;
+        void désarchiver<T>(IAgregat agrégat) where T : IAgregat;
+        void supprimer<T>(IAgregat agrégat) where T : IAgregat;
     }
 }
