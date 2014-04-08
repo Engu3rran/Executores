@@ -1,43 +1,31 @@
-﻿using System;
+﻿using System.Text.RegularExpressions;
 
 namespace Executores
 {
-    public class CodePostal : ObjetValeur, IObjetValeurValidable
+    public class CodePostal : ObjetValeurValidable
     {
-        public CodePostal() : base() { }
-
         public CodePostal(string valeur) : base(valeur) { }
 
-        public bool estValide()
+        public override bool estValide()
         {
             return estRenseigné()
-                && aLaBonneLongueur()
-                && estComposéDeChiffres();
+                && aLeBonFormat();
         }
 
-        private bool estRenseigné()
+        private bool aLeBonFormat()
         {
-            return _valeur != null && _valeur.Length > 0;
+            string regex = @"^\d{5}$";
+            return estVide()
+                || Regex
+                    .Match(_valeur, regex)
+                    .Success;
         }
 
-        private bool aLaBonneLongueur()
-        {
-            return _valeur != null && _valeur.Length == 5;
-        }
-
-        private bool estComposéDeChiffres()
-        {
-            int valeurConvertie;
-            return int.TryParse(_valeur, out valeurConvertie);
-        }
-
-        public Erreur donnerLErreur()
+        public override Erreur donnerLErreur()
         {
             if (!estRenseigné())
                 return VALIDATION.REQUIS_CODE_POSTAL;
-            if (!aLaBonneLongueur())
-                return VALIDATION.LONGUEUR_CODE_POSTAL;
-            if (!estComposéDeChiffres())
+            if (!aLeBonFormat())
                 return VALIDATION.INVALIDE_CODE_POSTAL;
             return null;
         }

@@ -8,30 +8,34 @@ namespace Executores
 
         public Agregat(IEntrepotPersistance entrepot)
         {
+            Id = Guid.NewGuid();
             _entrepot = entrepot;
         }
 
-        public Guid Id { get; set; }
-        public DateTime? DateCréation { get; set; }
-        public DateTime? DateModification { get; set; }
-        public DateTime? DateArchivage { get; set; }
+        public Guid Id { get; private set; }
+        public DateTime? DateCréation { get; private set; }
+        public DateTime? DateModification { get; private set; }
+        public DateTime? DateArchivage { get; private set; }
 
         public void enregistrer()
         {
             if (!DateCréation.HasValue)
-                _entrepot.insérer<T>(this);
+                DateCréation = DateTime.Now;
             else
-                _entrepot.modifier<T>(this);
+                DateModification = DateTime.Now;
+            _entrepot.enregistrer<T>(this);
         }
 
         public void archiver()
         {
-            _entrepot.archiver<T>(this);
+            DateArchivage = DateTime.Now;
+            _entrepot.enregistrer<T>(this);
         }
 
         public void désarchiver()
         {
-            _entrepot.désarchiver<T>(this);
+            DateArchivage = null;
+            _entrepot.enregistrer<T>(this);
         }
         
         public void supprimer()

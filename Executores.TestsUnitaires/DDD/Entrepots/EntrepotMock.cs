@@ -7,11 +7,11 @@ namespace Executores.TestsUnitaires
 {
     class EntrepotMock : IEntrepotPersistance
     {
-        private IDictionary<string, IList<IAgregat>> _collections;
+        private IDictionary<string, IList<IEntite>> _collections;
 
         public EntrepotMock()
         {
-            _collections = new Dictionary<string, IList<IAgregat>>();    
+            _collections = new Dictionary<string, IList<IEntite>>();    
         }
 
         public bool EstConnecté
@@ -22,7 +22,7 @@ namespace Executores.TestsUnitaires
             }
         }
 
-        public IQueryable<T> prendreLaCollection<T>() where T : IAgregat
+        public IQueryable<T> prendreLaCollection<T>() where T : IEntite
         {
             string nomDeLaCollection = trouverLeNomDeLaCollectionCorrespondante<T>();
             if (_collections.ContainsKey(nomDeLaCollection))
@@ -30,25 +30,22 @@ namespace Executores.TestsUnitaires
             return new List<T>().AsQueryable();
         }
 
-        private IQueryable<T> convertirLesEléments<T>(string nomDeLaCollection) where T : IAgregat
+        private IQueryable<T> convertirLesEléments<T>(string nomDeLaCollection) where T : IEntite
         {
             IList<T> éléments = new List<T>();
-            foreach (IAgregat agrégat in _collections[nomDeLaCollection])
+            foreach (IEntite agrégat in _collections[nomDeLaCollection])
                 éléments.Add((T)agrégat);
             return éléments.AsQueryable<T>();
         }
 
-        public void insérer<T>(IAgregat agrégat) where T : IAgregat
+        public void enregistrer<T>(IEntite entité) where T : IEntite
         {
             try
             {
-                agrégat.DateCréation = DateTime.Now;
                 string nomDeLaCollection = trouverLeNomDeLaCollectionCorrespondante<T>();
-                if (_collections.ContainsKey(nomDeLaCollection))
-                    ajouterALaCollection(agrégat, nomDeLaCollection);
-                _collections.Add(nomDeLaCollection, new List<IAgregat>());
-                agrégat.Id = Guid.NewGuid();
-                _collections[nomDeLaCollection].Add(agrégat);
+                if (!_collections.ContainsKey(nomDeLaCollection))
+                    _collections.Add(nomDeLaCollection, new List<IEntite>());
+                modifierLaCollection(entité, nomDeLaCollection);
             }
             catch(Exception e)
             {
@@ -56,45 +53,26 @@ namespace Executores.TestsUnitaires
             }
         }
 
-        private void ajouterALaCollection(IAgregat agrégat, string nomDeLaCollection)
+        private void modifierLaCollection(IEntite entité, string nomDeLaCollection)
         {
-            IList<IAgregat> collection = _collections[nomDeLaCollection];
-            if (collection.All(x => !x.Id.Equals(agrégat.Id)))
-            {
-                agrégat.Id = Guid.NewGuid();
-                _collections[nomDeLaCollection].Add(agrégat);
-            }
+            IList<IEntite> collection = _collections[nomDeLaCollection];
+            IEntite entitéAModifier = collection.SingleOrDefault(x => x.Id == entité.Id);
+            if (entitéAModifier == null)
+                _collections[nomDeLaCollection].Add(entité);
             else
-                throw new PersistanceException("Insertion impossible : Id déjà présent");
-        }
-
-        public void modifier<T>(IAgregat agrégat) where T : IAgregat
-        {
-            try
             {
-                agrégat.DateModification = DateTime.Now;
-                string nomDeLaCollection = trouverLeNomDeLaCollectionCorrespondante<T>();
-                if (_collections.ContainsKey(nomDeLaCollection))
-                    modifierLaCollection(agrégat, nomDeLaCollection);
-                else
-                    throw new PersistanceException("Modification impossible : Collection inexistante");
-            }
-            catch(Exception e)
-            {
-                throw new PersistanceException(e);
+                collection.Remove(entitéAModifier);
+                collection.Add(entité);
             }
         }
 
-        public void archiver<T>(IAgregat agrégat) where T : IAgregat
+        public void supprimer<T>(IEntite entité) where T : IEntite
         {
             try
             {
-                agrégat.DateArchivage = DateTime.Now;
                 string nomDeLaCollection = trouverLeNomDeLaCollectionCorrespondante<T>();
                 if (_collections.ContainsKey(nomDeLaCollection))
-                    modifierLaCollection(agrégat, nomDeLaCollection);
-                else
-                    throw new PersistanceException("Modification impossible : Collection inexistante");
+                    supprimerDeLaCollection(entité, nomDeLaCollection);
             }
             catch (Exception e)
             {
@@ -102,61 +80,14 @@ namespace Executores.TestsUnitaires
             }
         }
 
-        public void désarchiver<T>(IAgregat agrégat) where T : IAgregat
+        private void supprimerDeLaCollection(IEntite entité, string nomDeLaCollection)
         {
-            try
+            IList<IEntite> collection = _collections[nomDeLaCollection];
+            IEntite entitéASupprimer = collection.SingleOrDefault(x => x.Id == entité.Id);
+            if (entitéASupprimer != null)
             {
-                agrégat.DateArchivage = null;
-                string nomDeLaCollection = trouverLeNomDeLaCollectionCorrespondante<T>();
-                if (_collections.ContainsKey(nomDeLaCollection))
-                    modifierLaCollection(agrégat, nomDeLaCollection);
-                else
-                    throw new PersistanceException("Modification impossible : Collection inexistante");
+                collection.Remove(entitéASupprimer);
             }
-            catch (Exception e)
-            {
-                throw new PersistanceException(e);
-            }
-        }
-
-        private void modifierLaCollection(IAgregat agrégat, string nomDeLaCollection)
-        {
-            IList<IAgregat> collection = _collections[nomDeLaCollection];
-            if (collection.Any(x => x.Id.Equals(agrégat.Id)))
-            {
-                _collections[nomDeLaCollection] = _collections[nomDeLaCollection].Where(x => (x as IAgregat).Id != agrégat.Id).ToList();
-                _collections[nomDeLaCollection].Add(agrégat);
-            }
-            else
-                throw new PersistanceException("Modification impossible : Id absent de la collection");
-        }
-
-        public void supprimer<T>(IAgregat agrégat) where T : IAgregat
-        {
-            try
-            {
-                string nomDeLaCollection = trouverLeNomDeLaCollectionCorrespondante<T>();
-                if (_collections.ContainsKey(nomDeLaCollection))
-                    supprimerDeLaCollection(agrégat, nomDeLaCollection);
-                else
-                    throw new PersistanceException("Suppression impossible : Collection inexistante");
-            }
-            catch (Exception e)
-            {
-                throw new PersistanceException(e);
-            }
-        }
-
-        private void supprimerDeLaCollection(IAgregat agrégat, string nomDeLaCollection)
-        {
-            IList<IAgregat> collection = _collections[nomDeLaCollection];
-            if (collection.Any(x => x.Id.Equals(agrégat.Id)))
-            {
-                _collections[nomDeLaCollection] = _collections[nomDeLaCollection].Where(x => (x as IAgregat).Id != agrégat.Id).ToList();
-                _collections[nomDeLaCollection].Remove(agrégat);
-            }
-            else
-                throw new PersistanceException("Suppression impossible : Id absent de la collection");
         }
 
         private string trouverLeNomDeLaCollectionCorrespondante<T>()

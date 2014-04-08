@@ -1,34 +1,23 @@
-﻿
+﻿using System.Text.RegularExpressions;
+
 namespace Executores
 {
-    public class NumeroSIRET : ObjetValeur, IObjetValeurValidable
+    public class NumeroSIRET : ObjetValeurValidable
     {
-        public NumeroSIRET() : base() { }
-
         public NumeroSIRET(string valeur) : base(valeur) { }
 
-        public bool estValide()
+        public override bool estValide()
         {
             return estRenseigné()
-                && aLaBonneLongueur()
-                && estComposéDeChiffres()
+                && aLeBonFormat()
                 && respecteLAlgorithme();
         }
 
-        private bool estRenseigné()
+        private bool aLeBonFormat()
         {
-            return _valeur != null && _valeur.Length > 0;
-        }
-
-        private bool aLaBonneLongueur()
-        {
-            return _valeur != null && _valeur.Length == 14;
-        }
-
-        private bool estComposéDeChiffres()
-        {
-            long valeurConvertie;
-            return long.TryParse(_valeur, out valeurConvertie);
+            string regex = @"^\d{14}$";
+            return estVide()
+                || Regex.Match(_valeur, regex).Success;
         }
 
         private bool respecteLAlgorithme()
@@ -57,15 +46,11 @@ namespace Executores
             return (indice) % 2 == 0;
         }
 
-        public Erreur donnerLErreur()
+        public override Erreur donnerLErreur()
         {
             if (!estRenseigné())
                 return VALIDATION.REQUIS_NUMERO_SIRET;
-            if (!aLaBonneLongueur())
-                return VALIDATION.LONGUEUR_NUMERO_SIRET;
-            if (!estComposéDeChiffres())
-                return VALIDATION.INVALIDE_NUMERO_SIRET;
-            if (!respecteLAlgorithme())
+            if (!aLeBonFormat() || !respecteLAlgorithme())
                 return VALIDATION.INVALIDE_NUMERO_SIRET;
             return null;
         }

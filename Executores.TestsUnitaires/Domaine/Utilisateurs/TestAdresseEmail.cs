@@ -17,7 +17,7 @@ namespace Executores.TestsUnitaires
         [TestMethod]
         public void TestAdresseEmail_uneAdresseEmailVideEstInvalide()
         {
-            AdresseEmail adresseEmail = new AdresseEmail();
+            AdresseEmail adresseEmail = new AdresseEmail(null);
             Assert.IsFalse(adresseEmail.estValide());
             Assert.AreEqual(VALIDATION.REQUIS_ADRESSE_EMAIL, adresseEmail.donnerLErreur());
         }

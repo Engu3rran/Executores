@@ -67,6 +67,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="DDD\ObjetsValeur\TestObjetValeur.cs" />
+    <Compile Include="DDD\ObjetsValeur\TestObjetValeurValidable.cs" />
     <Compile Include="Domaine\Adresses\TestCodePostal.cs" />
     <Compile Include="Domaine\Adresses\TestAdressePostale.cs" />
     <Compile Include="Domaine\Entreprises\TestNumeroSIRET.cs" />

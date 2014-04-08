@@ -11,14 +11,12 @@ namespace Executores
         public static readonly Erreur LONGUEUR_VOIE = new Erreur("008", "La voie doit faire moins de " + CHAINE_LONGUEUR_MAX + " caractères");
         public static readonly Erreur LONGUEUR_COMPLEMENT = new Erreur("009", "Le complément doit faire moins de " + CHAINE_LONGUEUR_MAX + " caractères");
         public static readonly Erreur REQUIS_CODE_POSTAL = new Erreur("004", "Le code postal est requis");
-        public static readonly Erreur LONGUEUR_CODE_POSTAL = new Erreur("005", "Le code postal doit faire moins de " + CHAINE_LONGUEUR_MAX + " caractères");
         public static readonly Erreur INVALIDE_CODE_POSTAL = new Erreur("006", "Le code postal est invalide");
         public static readonly Erreur REQUIS_COMMUNE = new Erreur("010", "La commune est requise");
         public static readonly Erreur LONGUEUR_COMMUNE = new Erreur("011", "La commune doit faire moins de " + CHAINE_LONGUEUR_MAX + " caractères");
 
         //Entreprise
         public static readonly Erreur REQUIS_NUMERO_SIRET = new Erreur("001", "Le numéro SIRET est requis");
-        public static readonly Erreur LONGUEUR_NUMERO_SIRET = new Erreur("002", "Le numéro SIRET doit faire moins de " + CHAINE_LONGUEUR_MAX + " caractères");
         public static readonly Erreur INVALIDE_NUMERO_SIRET = new Erreur("003", "Le numéro SIRET est invalide");
 
         //Utilisateurs

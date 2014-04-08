@@ -15,7 +15,7 @@ namespace Executores.TestsUnitaires
         [TestMethod]
         public void TestCodePostal_unCodePostalVideEstInvalide()
         {
-            CodePostal codePostal = new CodePostal();
+            CodePostal codePostal = new CodePostal(null);
             Assert.IsFalse(codePostal.estValide());
             Assert.AreEqual(VALIDATION.REQUIS_CODE_POSTAL, codePostal.donnerLErreur());
         }
@@ -25,7 +25,7 @@ namespace Executores.TestsUnitaires
         {
             CodePostal codePostal = new CodePostal("0000");
             Assert.IsFalse(codePostal.estValide());
-            Assert.AreEqual(VALIDATION.LONGUEUR_CODE_POSTAL, codePostal.donnerLErreur());
+            Assert.AreEqual(VALIDATION.INVALIDE_CODE_POSTAL, codePostal.donnerLErreur());
         }
 
         [TestMethod]
@@ -33,7 +33,7 @@ namespace Executores.TestsUnitaires
         {
             CodePostal codePostal = new CodePostal("000000");
             Assert.IsFalse(codePostal.estValide());
-            Assert.AreEqual(VALIDATION.LONGUEUR_CODE_POSTAL, codePostal.donnerLErreur());
+            Assert.AreEqual(VALIDATION.INVALIDE_CODE_POSTAL, codePostal.donnerLErreur());
         }
 
         [TestMethod]

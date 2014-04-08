@@ -2,48 +2,31 @@
 
 namespace Executores
 {
-    public class AdresseEmail : ObjetValeur, IObjetValeurValidable
+    public class AdresseEmail : ObjetValeurValidable
     {
-        public AdresseEmail() : base() { }
-
         public AdresseEmail(string valeur) : base(valeur) { }
 
-        public bool estValide()
+        public override bool estValide()
         {
-            return estRenseignée()
-                   && aLeBonFormat();
-        }
-
-        private bool estRenseignée()
-        {
-            return !string.IsNullOrEmpty(_valeur);
-        }
-
-        private bool aLaBonneLongueur()
-        {
-            return _valeur != null && _valeur.Length <= VALIDATION.CHAINE_LONGUEUR_MAX;
+            return estRenseigné()
+                && aLaBonneLongueur()
+                && aLeBonFormat();
         }
 
         private bool aLeBonFormat()
         {
-            if (!string.IsNullOrEmpty(_valeur))
-            {
-                Regex règle = new Regex(
-                   string.Concat(
+            string regex = string.Concat(
                     @"^[\w!#$%&'*+\-/=?\^_`{|}~]+(\.[\w!#$%&'*+\-/=?\^_`{|}~]+)*",
                     "@",
                     @"((([\-\w]+\.)+[a-zA-Z]{2,4})|(([0-9]{1,3}\.){3}[0-9]{1,3}))$"
-                    )
-                );
-                Match comparaison = règle.Match(_valeur);
-                return comparaison.Success;
-            }
-            return true; 
+                    );
+            return estVide()
+                || Regex.Match(_valeur, regex).Success;
         }
 
-        public Erreur donnerLErreur()
+        public override Erreur donnerLErreur()
         {
-            if (!estRenseignée())
+            if (!estRenseigné())
                 return VALIDATION.REQUIS_ADRESSE_EMAIL;
             if (!aLaBonneLongueur())
                 return VALIDATION.LONGUEUR_ADRESSE_EMAIL;

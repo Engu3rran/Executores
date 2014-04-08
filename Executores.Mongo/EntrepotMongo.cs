@@ -23,7 +23,6 @@ namespace Executores.Mongo
         {
             _chaineDeConnexion = ConfigurationManager.AppSettings[CHAINE_CONNEXION];
             _nomBase = ConfigurationManager.AppSettings[NOM_BASE];
-            connecter();
         }
 
         public bool EstConnecté
@@ -57,8 +56,9 @@ namespace Executores.Mongo
             }
         }
 
-        public IQueryable<T> prendreLaCollection<T>() where T : IAgregat
+        public IQueryable<T> prendreLaCollection<T>() where T : IEntite
         {
+            connecter();
             string nomDeLaCollection = trouverLeNomDeLaCollectionCorrespondante<T>();
             if (EstConnecté)
                 return _baseDeDonnées.GetCollection<T>(nomDeLaCollection).AsQueryable<T>();
@@ -70,52 +70,14 @@ namespace Executores.Mongo
             return typeof(T).GetTypeInfo().Name;
         }
 
-        public void insérer<T>(IAgregat agrégat) where T : IAgregat
+        public void enregistrer<T>(IEntite entité ) where T : IEntite
         {
-            agrégat.DateCréation = DateTime.Now;
-            enregistrerLAgrégat(agrégat);
-        }
-
-        public void modifier<T>(IAgregat agrégat) where T : IAgregat
-        {
-            agrégat.DateModification = DateTime.Now;
-            enregistrerLAgrégat(agrégat);
-        }
-
-        public void archiver<T>(IAgregat agrégat) where T : IAgregat
-        {
-            agrégat.DateArchivage = DateTime.Now;
-            enregistrerLAgrégat(agrégat);
-        }
-
-        public void désarchiver<T>(IAgregat agrégat) where T : IAgregat
-        {
-            agrégat.DateArchivage = null;
-            enregistrerLAgrégat(agrégat);
-        }
-
-        private void enregistrerLAgrégat(IAgregat agrégat)
-        {
+            connecter();
             try
             {
-                string nomDeLaCollection = trouverLeNomDeLaCollectionCorrespondante(agrégat);
+                string nomDeLaCollection = trouverLeNomDeLaCollectionCorrespondante<T>();
                 MongoCollection collection = _baseDeDonnées.GetCollection(nomDeLaCollection);
-                collection.Save(agrégat);
-            }
-            catch(Exception e)
-            {
-                //TODO : log
-                throw new PersistanceException(e);
-            }
-        }
-
-        public void supprimer<T>(IAgregat agrégat) where T : IAgregat
-        {
-            try
-            {
-                string nomDeLaCollection = trouverLeNomDeLaCollectionCorrespondante(agrégat);
-                MongoCollection collection = _baseDeDonnées.GetCollection(nomDeLaCollection);
-                collection.Remove(Query.EQ(agrégat.PropertyName(x => x.Id), agrégat.Id));
+                collection.Save(entité);
             }
             catch (Exception e)
             {
@@ -124,10 +86,20 @@ namespace Executores.Mongo
             }
         }
 
-        private string trouverLeNomDeLaCollectionCorrespondante(IAgregat agrégat)
+        public void supprimer<T>(IEntite entité) where T : IEntite
         {
-            return agrégat.GetType().GetTypeInfo().Name;
+            connecter();
+            try
+            {
+                string nomDeLaCollection = trouverLeNomDeLaCollectionCorrespondante<T>();
+                MongoCollection collection = _baseDeDonnées.GetCollection(nomDeLaCollection);
+                collection.Remove(Query.EQ(entité.PropertyName(x => x.Id), entité.Id));
+            }
+            catch (Exception e)
+            {
+                //TODO : log
+                throw new PersistanceException(e);
+            }
         }
-
     }
 }

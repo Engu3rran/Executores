@@ -1,20 +1,17 @@
-﻿using System.Collections;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using Executores.Chiffrement;
 
 namespace Executores
 {
-    public class MotDePasse : ObjetValeur, IObjetValeurValidable
+    public class MotDePasse : ObjetValeurValidable
     {
         public const int MOT_DE_PASSE_LONGUEUR_MIN = 8;
         private const string SEL = "@apidbnçhbapçbzd";
         private readonly ChiffrementAES _chiffrement = new ChiffrementAES();
 
-        public MotDePasse() : base() { }
-
-        public MotDePasse(string valeurDéchiffrée)
+        public MotDePasse(string valeurDéchiffrée) : base(valeurDéchiffrée)
         {
-            _valeur = _chiffrement.chiffrer(valeurDéchiffrée);
+            _valeur = _chiffrement.chiffrer(_valeur);
         }
 
         public string déchiffrer()
@@ -22,19 +19,14 @@ namespace Executores
             return _chiffrement.déchiffrer(_valeur);
         }
 
-        public bool estValide()
+        public override bool estValide()
         {
             return estRenseigné()
                 && aLaBonneLongueur()
                 && aLaBonneComplexité();
         }
 
-        private bool estRenseigné()
-        {
-            return _valeur != null && _valeur.Length > 0;
-        }
-
-        private bool aLaBonneLongueur()
+        protected override bool aLaBonneLongueur()
         {
             string valeurDéchiffrée = déchiffrer();
             return _valeur != null
@@ -44,16 +36,12 @@ namespace Executores
 
         private bool aLaBonneComplexité()
         {
-            if (_valeur != null)
-            {
-                Regex règle = new Regex(@"^.*(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).*$");
-                Match comparaison = règle.Match(déchiffrer());
-                return comparaison.Success;
-            }
-            return false;
+            string regex = @"^.*(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).*$";
+            return estVide()
+                || Regex.Match(_valeur, regex).Success;
         }
 
-        public Erreur donnerLErreur()
+        public override Erreur donnerLErreur()
         {
             if (!estRenseigné())
                 return VALIDATION.REQUIS_MOT_DE_PASSE;

@@ -57,7 +57,9 @@
     <Compile Include="Bus\Lecture\ReponseRequete.cs" />
     <Compile Include="Bus\Lecture\Requetes\Requete.cs" />
     <Compile Include="Chiffrement\ChiffrementAES.cs" />
+    <Compile Include="DDD\Entites\IEntite.cs" />
     <Compile Include="DDD\ObjetsValeur\ObjetValeur.cs" />
+    <Compile Include="DDD\ObjetsValeur\ObjetValeurValidable.cs" />
     <Compile Include="Domaine\Adresses\AdressePostale.cs" />
     <Compile Include="Domaine\Adresses\CodePostal.cs" />
     <Compile Include="Domaine\Adresses\IAdresseMessage.cs" />
@@ -71,7 +73,6 @@
     <Compile Include="Domaine\Utilisateurs\Cabinet\Cabinet.cs" />
     <Compile Include="Domaine\Utilisateurs\MotDePasse.cs" />
     <Compile Include="Domaine\Validation\Erreur.cs" />
-    <Compile Include="Domaine\Validation\IObjetValeurValidable.cs" />
     <Compile Include="Domaine\Validation\ListeErreurs.cs" />
     <Compile Include="Domaine\Validation\VALIDATION.cs" />
     <Compile Include="Exceptions\ExceptionPersonnalise.cs" />

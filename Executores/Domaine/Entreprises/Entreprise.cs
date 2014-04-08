@@ -8,7 +8,6 @@ namespace Executores
 
         public Entreprise(IEntrepotPersistance entrepot) : base(entrepot)
         {
-            NuméroSIRET = new NumeroSIRET();
             AdressePostale = new AdressePostale();
         }
 
@@ -25,6 +24,7 @@ namespace Executores
 
         public bool estValide()
         {
+            vérifierQueLeNuméroSIRETEstDisponible();
             return NuméroSIRET.estValide()
                 && aUnNuméroSIRETDisponible()
                 && leNomEstValide()

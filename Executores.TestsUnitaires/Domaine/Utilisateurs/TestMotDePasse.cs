@@ -24,7 +24,7 @@ namespace Executores.TestsUnitaires
         [TestMethod]
         public void TestMotDePasse_unMotDePasseVideEstInvalide()
         {
-            MotDePasse motDePasse = new MotDePasse();
+            MotDePasse motDePasse = new MotDePasse(null);
             Assert.IsFalse(motDePasse.estValide());
             Assert.AreEqual(VALIDATION.REQUIS_MOT_DE_PASSE, motDePasse.donnerLErreur());
         }

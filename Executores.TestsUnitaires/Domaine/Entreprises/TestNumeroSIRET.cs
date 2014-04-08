@@ -15,7 +15,7 @@ namespace Executores.TestsUnitaires
         [TestMethod]
         public void TestNumeroSIRET_unNuméroSIRETVideEstInvalide()
         {
-            NumeroSIRET numéroSIRET = new NumeroSIRET();
+            NumeroSIRET numéroSIRET = new NumeroSIRET(null);
             Assert.IsFalse(numéroSIRET.estValide());
             Assert.AreEqual(VALIDATION.REQUIS_NUMERO_SIRET, numéroSIRET.donnerLErreur());
         }
@@ -25,7 +25,7 @@ namespace Executores.TestsUnitaires
         {
             NumeroSIRET numéroSIRET = new NumeroSIRET("123456789000150");
             Assert.IsFalse(numéroSIRET.estValide());
-            Assert.AreEqual(VALIDATION.LONGUEUR_NUMERO_SIRET, numéroSIRET.donnerLErreur());
+            Assert.AreEqual(VALIDATION.INVALIDE_NUMERO_SIRET, numéroSIRET.donnerLErreur());
         }
 
         [TestMethod]
@@ -33,7 +33,7 @@ namespace Executores.TestsUnitaires
         {
             NumeroSIRET numéroSIRET = new NumeroSIRET("1234567890001");
             Assert.IsFalse(numéroSIRET.estValide());
-            Assert.AreEqual(VALIDATION.LONGUEUR_NUMERO_SIRET, numéroSIRET.donnerLErreur());
+            Assert.AreEqual(VALIDATION.INVALIDE_NUMERO_SIRET, numéroSIRET.donnerLErreur());
         }
 
         [TestMethod]

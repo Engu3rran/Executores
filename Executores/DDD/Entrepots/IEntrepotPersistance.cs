@@ -4,12 +4,9 @@ namespace Executores
 {
     public interface IEntrepotPersistance
     {
-        bool EstConnecté { get;}
-        IQueryable<T> prendreLaCollection<T>() where T : IAgregat;
-        void insérer<T>(IAgregat agrégat) where T : IAgregat;
-        void modifier<T>(IAgregat agrégat) where T : IAgregat;
-        void archiver<T>(IAgregat agrégat) where T : IAgregat;
-        void désarchiver<T>(IAgregat agrégat) where T : IAgregat;
-        void supprimer<T>(IAgregat agrégat) where T : IAgregat;
+        bool EstConnecté { get; }
+        IQueryable<T> prendreLaCollection<T>() where T : IEntite;
+        void enregistrer<T>(IEntite entité) where T : IEntite;
+        void supprimer<T>(IEntite entité) where T : IEntite;
     }
 }

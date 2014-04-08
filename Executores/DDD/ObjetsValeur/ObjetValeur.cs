@@ -6,11 +6,6 @@ namespace Executores
     {
         protected string _valeur;
 
-        public ObjetValeur() 
-        {
-            _valeur = string.Empty;
-        }
-
         public ObjetValeur(string valeur)
         {
             _valeur = valeur;

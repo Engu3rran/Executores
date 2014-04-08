@@ -8,35 +8,43 @@ namespace Executores.Chiffrement
     {
         public string chiffrer(string chaine)
         {
-            ICryptoTransform crypteur = obtenirLesParamètres().CreateEncryptor();
-            using (MemoryStream msCrypteur = new MemoryStream())
+            if (chaine != null)
             {
-                using (CryptoStream csCrypteur = new CryptoStream(msCrypteur, crypteur, CryptoStreamMode.Write))
+                ICryptoTransform crypteur = obtenirLesParamètres().CreateEncryptor();
+                using (MemoryStream msCrypteur = new MemoryStream())
                 {
-                    using (StreamWriter swCrypteur = new StreamWriter(csCrypteur))
+                    using (CryptoStream csCrypteur = new CryptoStream(msCrypteur, crypteur, CryptoStreamMode.Write))
                     {
-                        swCrypteur.Write(chaine);
+                        using (StreamWriter swCrypteur = new StreamWriter(csCrypteur))
+                        {
+                            swCrypteur.Write(chaine);
+                        }
+                        byte[] bits = msCrypteur.ToArray();
+                        return Encoding.Default.GetString(bits);
                     }
-                    byte[] bits = msCrypteur.ToArray();
-                    return Encoding.Default.GetString(bits);
                 }
             }
+            return null;
         }
 
         public string déchiffrer(string binaire)
         {
-            byte[] bits = Encoding.Default.GetBytes(binaire);
-            ICryptoTransform décrypteur = obtenirLesParamètres().CreateDecryptor();
-            using (MemoryStream msDécrypteur = new MemoryStream(bits))
+            if (binaire != null)
             {
-                using (CryptoStream csDécrypteur = new CryptoStream(msDécrypteur, décrypteur, CryptoStreamMode.Read))
+                byte[] bits = Encoding.Default.GetBytes(binaire);
+                ICryptoTransform décrypteur = obtenirLesParamètres().CreateDecryptor();
+                using (MemoryStream msDécrypteur = new MemoryStream(bits))
                 {
-                    using (StreamReader srDécrypteur = new StreamReader(csDécrypteur))
+                    using (CryptoStream csDécrypteur = new CryptoStream(msDécrypteur, décrypteur, CryptoStreamMode.Read))
                     {
-                        return srDécrypteur.ReadToEnd();
+                        using (StreamReader srDécrypteur = new StreamReader(csDécrypteur))
+                        {
+                            return srDécrypteur.ReadToEnd();
+                        }
                     }
                 }
             }
+            return null;
         }
 
         private Aes obtenirLesParamètres()

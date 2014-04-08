@@ -2,11 +2,10 @@
 
 namespace Executores
 {
-    public interface IAgregat
+    public interface IAgregat : IEntite
     {
-        Guid Id { get; set; }
-        DateTime? DateCréation { get; set; }
-        DateTime? DateModification { get; set; }
-        DateTime? DateArchivage { get; set; }
+        DateTime? DateCréation { get; }
+        DateTime? DateModification { get; }
+        DateTime? DateArchivage { get; }
     }
 }

@@ -4,9 +4,9 @@ namespace Executores
 {
     public class AdressePostale
     {
-        public AdressePostale()
+        public AdressePostale() 
         {
-            CodePostal = new CodePostal();
+            CodePostal = new CodePostal(null);
         }
 
         public string Voie { get; set; }
