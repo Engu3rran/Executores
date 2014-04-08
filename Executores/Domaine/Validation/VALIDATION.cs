@@ -17,7 +17,10 @@ namespace Executores
 
         //Entreprise
         public static readonly Erreur REQUIS_NUMERO_SIRET = new Erreur("001", "Le numéro SIRET est requis");
-        public static readonly Erreur INVALIDE_NUMERO_SIRET = new Erreur("003", "Le numéro SIRET est invalide");
+        public static readonly Erreur INVALIDE_NUMERO_SIRET = new Erreur("002", "Le numéro SIRET est invalide");
+        public static readonly Erreur REQUIS_DENOMINATION = new Erreur("003", "La dénomination est requise");
+        public static readonly Erreur LONGUEUR_DENOMINATION = new Erreur("004", "La dénomination doit faire moins de " + CHAINE_LONGUEUR_MAX + " caractères");
+        public static readonly Erreur INDISPONIBLE_NUMERO_SIRET = new Erreur("005", "Le numéro SIRET est déjà utilisé");
 
         //Utilisateurs
         public static readonly Erreur REQUIS_MOT_DE_PASSE = new Erreur("101", "Le mot de passe est requis");
@@ -26,5 +29,9 @@ namespace Executores
         public static readonly Erreur REQUIS_ADRESSE_EMAIL = new Erreur("104", "L'adresse e-mail est requise");
         public static readonly Erreur LONGUEUR_ADRESSE_EMAIL = new Erreur("105", "L'adresse e-mail doit faire moins de " + CHAINE_LONGUEUR_MAX + " caractères");
         public static readonly Erreur INVALIDE_ADRESSE_EMAIL = new Erreur("106", "L'adresse e-mail est invalide");
+        public static readonly Erreur REQUIS_NOM = new Erreur("107", "Le nom est requis");
+        public static readonly Erreur LONGUEUR_NOM = new Erreur("108", "Le nom doit faire moins de " + CHAINE_LONGUEUR_MAX + " caractères");
+        public static readonly Erreur REQUIS_PRENOM = new Erreur("109", "Le prénom est requis");
+        public static readonly Erreur LONGUEUR_PRENOM = new Erreur("110", "Le prénom doit faire moins de " + CHAINE_LONGUEUR_MAX + " caractères");
     }
 }

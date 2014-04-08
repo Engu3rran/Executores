@@ -5,18 +5,18 @@ using Moq;
 namespace Executores.TestsUnitaires
 {
     [TestClass]
-    public class TestEntrepotMock
+    public class TestEntrepotPersistanceMock
     {
         private IEntrepotPersistance _entrepot;
 
         [TestInitialize]
         public void initialiser()
         {
-            _entrepot = new EntrepotMock();
+            _entrepot = new EntrepotPersistanceMock();
         }
 
         [TestMethod]
-        public void TestEntrepotMock_peutinsérerUnAgrégat()
+        public void TestEntrepotPersistanceMock_peutinsérerUnAgrégat()
         {
             int nombreInitial = _entrepot.prendreLaCollection<IEntite>().Count();
             IEntite entité = Mock.Of<IEntite>();
@@ -26,7 +26,7 @@ namespace Executores.TestsUnitaires
         }
 
         [TestMethod]
-        public void TestEntrepotMock_peutModifierUnAgrégat()
+        public void TestEntrepotPersistanceMock_peutModifierUnAgrégat()
         {
             int nombreInitial = _entrepot.prendreLaCollection<IEntite>().Count();
             IEntite entité = Mock.Of<IEntite>();
@@ -39,7 +39,7 @@ namespace Executores.TestsUnitaires
         }
 
         [TestMethod]
-        public void TestEntrepotMock_peutSupprimerUnAgrégat()
+        public void TestEntrepotPersistanceMock_peutSupprimerUnAgrégat()
         {
             IEntite entité = Mock.Of<IEntite>();
             _entrepot.enregistrer<IEntite>(entité);

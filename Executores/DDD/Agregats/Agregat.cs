@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace Executores
 {
@@ -16,6 +17,10 @@ namespace Executores
         public DateTime? DateCréation { get; private set; }
         public DateTime? DateModification { get; private set; }
         public DateTime? DateArchivage { get; private set; }
+
+        public abstract bool estValide();
+
+        public abstract ListeErreurs donnerLesErreurs();
 
         public void enregistrer()
         {
@@ -41,6 +46,15 @@ namespace Executores
         public void supprimer()
         {
             _entrepot.supprimer<T>(this);
+        }
+
+        public static T charger(string id)
+        {
+            Guid idConverti = Guid.Parse(id);
+            return Fabrique
+                .constuire<IEntrepotPersistance>()
+                .prendreLaCollection<T>()
+                .SingleOrDefault(x => x.Id == idConverti);
         }
     }
 }

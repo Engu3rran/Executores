@@ -30,8 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Ninject">
-      <HintPath>..\packages\Ninject.3.2.0.0\lib\net45-full\Ninject.dll</HintPath>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -66,12 +67,18 @@
     <Compile Include="DDD\Agregats\Agregat.cs" />
     <Compile Include="DDD\Agregats\IAgregat.cs" />
     <Compile Include="DDD\Entrepots\IEntrepotPersistance.cs" />
+    <Compile Include="Domaine\Entreprises\Denomination.cs" />
     <Compile Include="Domaine\Entreprises\Entreprise.cs" />
     <Compile Include="Domaine\Entreprises\IEntrepriseMessage.cs" />
     <Compile Include="Domaine\Entreprises\NumeroSIRET.cs" />
     <Compile Include="Domaine\Utilisateurs\AdresseEmail.cs" />
     <Compile Include="Domaine\Utilisateurs\Cabinet\Cabinet.cs" />
+    <Compile Include="Domaine\Utilisateurs\Civilite.cs" />
     <Compile Include="Domaine\Utilisateurs\MotDePasse.cs" />
+    <Compile Include="Domaine\Utilisateurs\Nom.cs" />
+    <Compile Include="Domaine\Utilisateurs\Prenom.cs" />
+    <Compile Include="Domaine\Utilisateurs\TypeUtilisateur.cs" />
+    <Compile Include="Domaine\Utilisateurs\Utilisateur.cs" />
     <Compile Include="Domaine\Validation\Erreur.cs" />
     <Compile Include="Domaine\Validation\ListeErreurs.cs" />
     <Compile Include="Domaine\Validation\VALIDATION.cs" />

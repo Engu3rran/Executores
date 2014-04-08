@@ -12,28 +12,28 @@ namespace Executores
         }
 
         public NumeroSIRET NuméroSIRET {get; set;}
-        public string Nom { get; set; }
+        public Denomination Dénomination { get; set; }
         public AdressePostale AdressePostale { get; set; }
 
         public void modifier(IEntrepriseMessage message)
         {
             NuméroSIRET = new NumeroSIRET(message.NuméroSIRET);
-            Nom = message.Nom;
+            Dénomination = new Denomination(message.Nom);
             AdressePostale.modifier(message.AdressePostale);
         }
 
-        public bool estValide()
+        public override bool estValide()
         {
             vérifierQueLeNuméroSIRETEstDisponible();
             return NuméroSIRET.estValide()
                 && aUnNuméroSIRETDisponible()
-                && leNomEstValide()
+                && Dénomination.estValide()
                 && AdressePostale.estValide();
         }
 
         protected void vérifierQueLeNuméroSIRETEstDisponible()
         {
-            _aUnNuméroSIRETDisponible = _entrepot
+            _aUnNuméroSIRETDisponible = !_entrepot
                 .prendreLaCollection<Entreprise>()
                 .Any(x => 
                     x.Id != Id
@@ -48,26 +48,14 @@ namespace Executores
                 || _aUnNuméroSIRETDisponible.Value;
         }
 
-        protected bool leNomEstValide()
-        {
-            return leNomEstRenseigné()
-                && leNomALaBonneLongueur();
-        }
-
-        protected bool leNomEstRenseigné()
-        {
-            return !string.IsNullOrEmpty(Nom);
-        }
-
-        protected bool leNomALaBonneLongueur()
-        {
-            return Nom == null
-                || Nom.Length <= VALIDATION.CHAINE_LONGUEUR_MAX;
-        }
-
-        public ListeErreurs donnerLesErreurs()
+        public override ListeErreurs donnerLesErreurs()
         {
             ListeErreurs erreurs = new ListeErreurs();
+            erreurs.ajouterUneErreur(NuméroSIRET.donnerLErreur());
+            if (!aUnNuméroSIRETDisponible())
+                erreurs.ajouterUneErreur(VALIDATION.INDISPONIBLE_NUMERO_SIRET);
+            erreurs.ajouterUneErreur(Dénomination.donnerLErreur());
+            erreurs.ajouterLesErreurs(AdressePostale.donnerLesErreurs());
             return erreurs;
         }
     }

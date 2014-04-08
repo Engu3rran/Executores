@@ -8,7 +8,7 @@ namespace Executores
     {
         private static IKernel _noyau;
 
-        public T constuire<T>()
+        public static T constuire<T>()
         {
             try
             {

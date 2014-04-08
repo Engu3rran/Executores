@@ -5,11 +5,11 @@ using System.Reflection;
 
 namespace Executores.TestsUnitaires
 {
-    class EntrepotMock : IEntrepotPersistance
+    class EntrepotPersistanceMock : IEntrepotPersistance
     {
         private IDictionary<string, IList<IEntite>> _collections;
 
-        public EntrepotMock()
+        public EntrepotPersistanceMock()
         {
             _collections = new Dictionary<string, IList<IEntite>>();    
         }
