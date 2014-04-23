@@ -2,7 +2,7 @@
 
 namespace Executores
 {
-    public interface IAgregat : IEntite
+    public interface IAgregat : IEntite, IEnregistrable
     {
         DateTime? DateCréation { get; }
         DateTime? DateModification { get; }

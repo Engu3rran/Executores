@@ -16,10 +16,13 @@ namespace Executores
 
         public void modifier(IAdressePostaleMessage message)
         {
-            Voie = message.Voie;
-            Complément = message.Complément;
-            CodePostal = new CodePostal(message.CodePostal);
-            Commune = message.Commune;
+            if (message != null)
+            {
+                Voie = message.Voie;
+                Complément = message.Complément;
+                CodePostal = new CodePostal(message.CodePostal);
+                Commune = message.Commune;
+            }
         }
 
         public bool estValide()
@@ -70,9 +73,9 @@ namespace Executores
                 || Commune.Length <= VALIDATION.CHAINE_LONGUEUR_MAX;
         }
 
-        public ListeErreurs donnerLesErreurs()
+        public ListeMessagesValidation donnerLesErreurs()
         {
-            ListeErreurs erreurs = new ListeErreurs();
+            ListeMessagesValidation erreurs = new ListeMessagesValidation();
             donnerLesErreursDeLaVoie(erreurs);
             donnerLesErreursDuComplément(erreurs);
             erreurs.ajouterUneErreur(CodePostal.donnerLErreur());
@@ -80,7 +83,7 @@ namespace Executores
             return erreurs;
         }
 
-        private void donnerLesErreursDeLaVoie(ListeErreurs erreurs)
+        private void donnerLesErreursDeLaVoie(ListeMessagesValidation erreurs)
         {
             if (!laVoieEstRenseignée())
                 erreurs.ajouterUneErreur(VALIDATION.REQUIS_VOIE);
@@ -88,13 +91,13 @@ namespace Executores
                 erreurs.ajouterUneErreur(VALIDATION.LONGUEUR_VOIE);
         }
 
-        private void donnerLesErreursDuComplément(ListeErreurs erreurs)
+        private void donnerLesErreursDuComplément(ListeMessagesValidation erreurs)
         {
             if (!leComplémentALaBonneLongueur())
                 erreurs.ajouterUneErreur(VALIDATION.LONGUEUR_COMPLEMENT);
         }
 
-        private void donnerLesErreursDeLaCommune(ListeErreurs erreurs)
+        private void donnerLesErreursDeLaCommune(ListeMessagesValidation erreurs)
         {
             if (!laCommuneEstRenseignée())
                 erreurs.ajouterUneErreur(VALIDATION.REQUIS_COMMUNE);

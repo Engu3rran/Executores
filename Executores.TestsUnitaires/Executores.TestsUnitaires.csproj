@@ -76,6 +76,8 @@
     <Compile Include="Domaine\Utilisateurs\TestMotDePasse.cs" />
     <Compile Include="DDD\Entrepots\EntrepotPersistanceMock.cs" />
     <Compile Include="Domaine\Utilisateurs\TestAdresseEmail.cs" />
+    <Compile Include="Mocks\AdresseMessageMock.cs" />
+    <Compile Include="Mocks\EntrepriseMessageMock.cs" />
     <Compile Include="ModuleInjectionTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DDD\Entrepots\TestEntrepotPersistanceMock.cs" />

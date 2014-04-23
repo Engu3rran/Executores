@@ -46,7 +46,7 @@ namespace Executores
             return (indice) % 2 == 0;
         }
 
-        public override Erreur donnerLErreur()
+        public override MessageValidation donnerLErreur()
         {
             if (!estRenseigné())
                 return VALIDATION.REQUIS_NUMERO_SIRET;

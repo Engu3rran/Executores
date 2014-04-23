@@ -3,22 +3,22 @@ using System.Collections.Generic;
 
 namespace Executores
 {
-    public class ListeErreurs : IEnumerable<Erreur>
+    public class ListeMessagesValidation : IEnumerable<MessageValidation>
     {
-        private List<Erreur> _erreurs = new List<Erreur>();
+        private List<MessageValidation> _erreurs = new List<MessageValidation>();
 
-        public void ajouterUneErreur(Erreur uneErreur)
+        public void ajouterUneErreur(MessageValidation uneErreur)
         {
             if (uneErreur != null)
                 _erreurs.Add(uneErreur);
         }
 
-        public void ajouterLesErreurs(ListeErreurs listeDesErreurs)
+        public void ajouterLesErreurs(ListeMessagesValidation listeDesErreurs)
         {
             _erreurs.AddRange(listeDesErreurs._erreurs);
         }
 
-        public IEnumerator<Erreur> GetEnumerator()
+        public IEnumerator<MessageValidation> GetEnumerator()
         {
             return _erreurs.GetEnumerator();
         }

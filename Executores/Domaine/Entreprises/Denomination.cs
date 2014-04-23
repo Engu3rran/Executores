@@ -8,7 +8,7 @@ namespace Executores
             _estRequis = true;
         }
 
-        public override Erreur donnerLErreur()
+        public override MessageValidation donnerLErreur()
         {
             if (!estRenseigné())
                 return VALIDATION.REQUIS_DENOMINATION;

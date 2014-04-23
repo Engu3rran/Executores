@@ -5,7 +5,7 @@ namespace Executores
     {
         public Prenom(string valeur) : base(valeur) { }
 
-        public override Erreur donnerLErreur()
+        public override MessageValidation donnerLErreur()
         {
             if (!estRenseigné())
                 return VALIDATION.REQUIS_PRENOM;

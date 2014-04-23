@@ -6,10 +6,7 @@ namespace Executores
     {
         private bool? _aUnNuméroSIRETDisponible;
 
-        public Entreprise(IEntrepotPersistance entrepot) : base(entrepot)
-        {
-            AdressePostale = new AdressePostale();
-        }
+        public Entreprise() : base() { }
 
         public NumeroSIRET NuméroSIRET {get; set;}
         public Denomination Dénomination { get; set; }
@@ -19,7 +16,9 @@ namespace Executores
         {
             NuméroSIRET = new NumeroSIRET(message.NuméroSIRET);
             Dénomination = new Denomination(message.Nom);
+            AdressePostale = new AdressePostale();
             AdressePostale.modifier(message.AdressePostale);
+
         }
 
         public override bool estValide()
@@ -48,9 +47,9 @@ namespace Executores
                 || _aUnNuméroSIRETDisponible.Value;
         }
 
-        public override ListeErreurs donnerLesErreurs()
+        public override ListeMessagesValidation donnerLesMessagesDeValidation()
         {
-            ListeErreurs erreurs = new ListeErreurs();
+            ListeMessagesValidation erreurs = new ListeMessagesValidation();
             erreurs.ajouterUneErreur(NuméroSIRET.donnerLErreur());
             if (!aUnNuméroSIRETDisponible())
                 erreurs.ajouterUneErreur(VALIDATION.INDISPONIBLE_NUMERO_SIRET);

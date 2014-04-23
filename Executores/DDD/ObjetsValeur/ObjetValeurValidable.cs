@@ -40,6 +40,6 @@ namespace Executores
                 || _valeur.Length <= VALIDATION.CHAINE_LONGUEUR_MAX;
         }
 
-        public abstract Erreur donnerLErreur();
+        public abstract MessageValidation donnerLErreur();
     }
 }

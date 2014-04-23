@@ -21,7 +21,7 @@ namespace Executores
                     .Success;
         }
 
-        public override Erreur donnerLErreur()
+        public override MessageValidation donnerLErreur()
         {
             if (!estRenseigné())
                 return VALIDATION.REQUIS_CODE_POSTAL;

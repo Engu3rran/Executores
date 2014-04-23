@@ -10,13 +10,10 @@ namespace Executores.TestsUnitaires
         [TestMethod]
         public void TestEntreprise_uneEntrepriseVideEstInvalide()
         {
-            Mock<IEntrepriseMessage> mock = new Mock<IEntrepriseMessage>();
-            mock.SetupGet(x => x.AdressePostale).Returns(Mock.Of<IAdressePostaleMessage>());
-            Entreprise entreprise = Fabrique.constuire<Entreprise>();
-            IEntrepriseMessage message = mock.Object;
-            entreprise.modifier(message);
+            Entreprise entreprise = new Entreprise();
+            entreprise.modifier(TEST.MESSAGE_ENTREPRISE_VIDE);
             Assert.IsFalse(entreprise.estValide());
-            ListeErreurs erreurs = entreprise.donnerLesErreurs();
+            ListeMessagesValidation erreurs = entreprise.donnerLesMessagesDeValidation();
             Assert.AreEqual(5, erreurs.Count());
             Assert.IsTrue(erreurs.Any(x => x == VALIDATION.REQUIS_NUMERO_SIRET));
             Assert.IsTrue(erreurs.Any(x => x == VALIDATION.REQUIS_DENOMINATION));
@@ -28,24 +25,24 @@ namespace Executores.TestsUnitaires
         [TestMethod]
         public void TestEntreprise_uneEntrepriseValideEstValide()
         {
-            Entreprise entreprise = Fabrique.constuire<Entreprise>();
+            Entreprise entreprise = new Entreprise();
             IEntrepriseMessage message = TEST.MESSAGE_ENTREPRISE_VALIDE;
             entreprise.modifier(message);
             Assert.IsTrue(entreprise.estValide());
-            Assert.AreEqual(0, entreprise.donnerLesErreurs().Count());
+            Assert.AreEqual(0, entreprise.donnerLesMessagesDeValidation().Count());
         }
 
         [TestMethod]
         public void TestEntreprise_uneEntrepriseAvecUnNuméroSIRETDéjàPrisEstInvalide()
         {
-            Entreprise entrepriseEnregistrée = Fabrique.constuire<Entreprise>();
+            Entreprise entrepriseEnregistrée = new Entreprise();
             IEntrepriseMessage message = TEST.MESSAGE_ENTREPRISE_VALIDE;
-            entrepriseEnregistrée.modifier(message);
+            entrepriseEnregistrée.modifier(TEST.MESSAGE_ENTREPRISE_VALIDE);
             entrepriseEnregistrée.enregistrer();
-            Entreprise entreprise = Fabrique.constuire<Entreprise>();
+            Entreprise entreprise = new Entreprise();
             entreprise.modifier(message);
             Assert.IsFalse(entreprise.estValide());
-            ListeErreurs erreurs = entreprise.donnerLesErreurs();
+            ListeMessagesValidation erreurs = entreprise.donnerLesMessagesDeValidation();
             Assert.AreEqual(1, erreurs.Count());
             Assert.IsTrue(erreurs.Any(x => x == VALIDATION.INDISPONIBLE_NUMERO_SIRET));
         }

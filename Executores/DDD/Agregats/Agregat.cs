@@ -3,33 +3,25 @@ using System.Linq;
 
 namespace Executores
 {
-    public abstract class Agregat<T> : IAgregat where T : IAgregat
+    public abstract class Agregat<T> : Entite<T>, IAgregat, IValidable where T : IAgregat
     {
-        protected IEntrepotPersistance _entrepot;
-
         public Agregat(IEntrepotPersistance entrepot)
         {
-            Id = Guid.NewGuid();
             _entrepot = entrepot;
         }
 
-        public Guid Id { get; private set; }
+        public Agregat() : base() 
+        {
+            DateCréation = DateTime.Now;
+        }
+
         public DateTime? DateCréation { get; private set; }
         public DateTime? DateModification { get; private set; }
         public DateTime? DateArchivage { get; private set; }
 
         public abstract bool estValide();
 
-        public abstract ListeErreurs donnerLesErreurs();
-
-        public void enregistrer()
-        {
-            if (!DateCréation.HasValue)
-                DateCréation = DateTime.Now;
-            else
-                DateModification = DateTime.Now;
-            _entrepot.enregistrer<T>(this);
-        }
+        public abstract ListeMessagesValidation donnerLesMessagesDeValidation();
 
         public void archiver()
         {
@@ -42,11 +34,6 @@ namespace Executores
             DateArchivage = null;
             _entrepot.enregistrer<T>(this);
         }
-        
-        public void supprimer()
-        {
-            _entrepot.supprimer<T>(this);
-        }
 
         public static T charger(string id)
         {
@@ -54,7 +41,7 @@ namespace Executores
             return Fabrique
                 .constuire<IEntrepotPersistance>()
                 .prendreLaCollection<T>()
-                .SingleOrDefault(x => x.Id == idConverti);
+                .Single(x => x.Id == idConverti);
         }
     }
 }

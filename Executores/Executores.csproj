@@ -43,21 +43,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bus\Ecriture\BusCommande.cs" />
-    <Compile Include="Bus\Ecriture\Commandes\Commande.cs" />
-    <Compile Include="Bus\Ecriture\IMessageCommande.cs" />
-    <Compile Include="Bus\Ecriture\ReponseCommande.cs" />
-    <Compile Include="Bus\Instructions\Bus.cs" />
-    <Compile Include="Bus\Instructions\CodeMessageBus.cs" />
-    <Compile Include="Bus\Instructions\IInstructionBus.cs" />
-    <Compile Include="Bus\Instructions\IMessageBus.cs" />
-    <Compile Include="Bus\Instructions\IReponseInstructionBus.cs" />
-    <Compile Include="Bus\Instructions\ValidationFormulaire.cs" />
-    <Compile Include="Bus\Lecture\BusRequete.cs" />
-    <Compile Include="Bus\Lecture\IMessageRequete.cs" />
-    <Compile Include="Bus\Lecture\ReponseRequete.cs" />
-    <Compile Include="Bus\Lecture\Requetes\Requete.cs" />
-    <Compile Include="Chiffrement\ChiffrementAES.cs" />
+    <Compile Include="CQRS\Ecriture\BusCommande.cs" />
+    <Compile Include="CQRS\Ecriture\Commandes\Commande.cs" />
+    <Compile Include="CQRS\Ecriture\IMessageCommande.cs" />
+    <Compile Include="CQRS\Ecriture\ReponseCommande.cs" />
+    <Compile Include="CQRS\Instructions\Bus.cs" />
+    <Compile Include="CQRS\Instructions\CodeMessageBus.cs" />
+    <Compile Include="CQRS\Instructions\IInstructionBus.cs" />
+    <Compile Include="CQRS\Instructions\IMessageBus.cs" />
+    <Compile Include="CQRS\Instructions\IReponseInstructionBus.cs" />
+    <Compile Include="CQRS\Instructions\ValidationFormulaire.cs" />
+    <Compile Include="CQRS\Lecture\BusRequete.cs" />
+    <Compile Include="CQRS\Lecture\IMessageRequete.cs" />
+    <Compile Include="CQRS\Lecture\ReponseRequete.cs" />
+    <Compile Include="CQRS\Lecture\Requetes\Requete.cs" />
+    <Compile Include="DDD\Chiffrement\ChiffrementAES.cs" />
+    <Compile Include="DDD\Entites\Entite.cs" />
+    <Compile Include="DDD\Entites\IEnregistrable.cs" />
     <Compile Include="DDD\Entites\IEntite.cs" />
     <Compile Include="DDD\ObjetsValeur\ObjetValeur.cs" />
     <Compile Include="DDD\ObjetsValeur\ObjetValeurValidable.cs" />
@@ -74,14 +76,16 @@
     <Compile Include="Domaine\Utilisateurs\AdresseEmail.cs" />
     <Compile Include="Domaine\Utilisateurs\Cabinet\Cabinet.cs" />
     <Compile Include="Domaine\Utilisateurs\Civilite.cs" />
+    <Compile Include="Domaine\Utilisateurs\IUtilisateurMessage.cs" />
     <Compile Include="Domaine\Utilisateurs\MotDePasse.cs" />
     <Compile Include="Domaine\Utilisateurs\Nom.cs" />
     <Compile Include="Domaine\Utilisateurs\Prenom.cs" />
     <Compile Include="Domaine\Utilisateurs\TypeUtilisateur.cs" />
     <Compile Include="Domaine\Utilisateurs\Utilisateur.cs" />
-    <Compile Include="Domaine\Validation\Erreur.cs" />
-    <Compile Include="Domaine\Validation\ListeErreurs.cs" />
-    <Compile Include="Domaine\Validation\VALIDATION.cs" />
+    <Compile Include="DDD\Validation\IValidable.cs" />
+    <Compile Include="DDD\Validation\MessageValidation.cs" />
+    <Compile Include="DDD\Validation\ListeErreurs.cs" />
+    <Compile Include="Domaine\VALIDATION.cs" />
     <Compile Include="Exceptions\ExceptionPersonnalise.cs" />
     <Compile Include="Exceptions\InjectionException.cs" />
     <Compile Include="Exceptions\PersistanceException.cs" />
@@ -90,10 +94,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Bus\Ecriture\Commandes\Constats\" />
-    <Folder Include="Bus\Ecriture\Messages\Constats\" />
-    <Folder Include="Bus\Lecture\Messages\Constats\" />
-    <Folder Include="Bus\Lecture\Requetes\Constats\" />
+    <Folder Include="CQRS\Ecriture\Commandes\Constats\" />
+    <Folder Include="CQRS\Ecriture\Messages\Constats\" />
+    <Folder Include="CQRS\Lecture\Messages\Constats\" />
+    <Folder Include="CQRS\Lecture\Requetes\Constats\" />
     <Folder Include="Domaine\Constats\" />
   </ItemGroup>
   <ItemGroup>

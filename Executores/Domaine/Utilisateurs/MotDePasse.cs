@@ -41,7 +41,7 @@ namespace Executores
                 || Regex.Match(_valeur, regex).Success;
         }
 
-        public override Erreur donnerLErreur()
+        public override MessageValidation donnerLErreur()
         {
             if (!estRenseigné())
                 return VALIDATION.REQUIS_MOT_DE_PASSE;

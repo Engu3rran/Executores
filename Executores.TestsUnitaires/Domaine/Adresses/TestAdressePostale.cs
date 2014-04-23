@@ -10,7 +10,8 @@ namespace Executores.TestsUnitaires
         [TestMethod]
         public void TestAdressePostale_uneAdressePostaleValideEstValide()
         {
-            AdressePostale adressePostale = TEST.ADRESSE_POSTALE_VALIDE;
+            AdressePostale adressePostale = new AdressePostale();
+            adressePostale.modifier(TEST.MESSAGE_ADRESSE_POSTALE_VALIDE);
             Assert.IsTrue(adressePostale.estValide());
         }
 
@@ -19,7 +20,7 @@ namespace Executores.TestsUnitaires
         {
             AdressePostale adressePostale = new AdressePostale();
             Assert.IsFalse(adressePostale.estValide());
-            ListeErreurs erreurs = adressePostale.donnerLesErreurs();
+            ListeMessagesValidation erreurs = adressePostale.donnerLesErreurs();
             Assert.AreEqual(3, erreurs.Count());
             Assert.IsTrue(erreurs.Any(x => x == VALIDATION.REQUIS_VOIE));
             Assert.IsTrue(erreurs.Any(x => x == VALIDATION.REQUIS_COMMUNE));
@@ -30,7 +31,7 @@ namespace Executores.TestsUnitaires
         {
             AdressePostale adressePostale = new AdressePostale() { Voie = TEST.CHAINEx257, Complément = TEST.CHAINEx257, CodePostal = TEST.CODE_POSTAL_VALIDE, Commune = TEST.CHAINEx257 };
             Assert.IsFalse(adressePostale.estValide());
-            ListeErreurs erreurs = adressePostale.donnerLesErreurs();
+            ListeMessagesValidation erreurs = adressePostale.donnerLesErreurs();
             Assert.AreEqual(3, erreurs.Count());
             Assert.IsTrue(erreurs.Any(x => x == VALIDATION.LONGUEUR_VOIE));
             Assert.IsTrue(erreurs.Any(x => x == VALIDATION.LONGUEUR_COMPLEMENT));
@@ -40,12 +41,7 @@ namespace Executores.TestsUnitaires
         [TestMethod]
         public void TestAdressePostale_uneAdressePeutEtreModifiée()
         {
-            Mock<IAdressePostaleMessage> mock = new Mock<IAdressePostaleMessage>();
-            mock.SetupGet(x => x.Voie).Returns("7, rue pouet");
-            mock.SetupGet(x => x.Complément).Returns("Appartement 3");
-            mock.SetupGet(x => x.CodePostal).Returns("33520");
-            mock.SetupGet(x => x.Commune).Returns("Bruges");
-            IAdressePostaleMessage message = mock.Object;
+            IAdressePostaleMessage message = TEST.MESSAGE_ADRESSE_POSTALE_VALIDE;
             AdressePostale adressePostale = new AdressePostale();
             adressePostale.modifier(message);
             Assert.AreEqual(message.Voie, adressePostale.Voie);

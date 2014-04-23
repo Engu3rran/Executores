@@ -1,11 +1,11 @@
 ﻿
 namespace Executores
 {
-    public class Erreur : ObjetValeur
+    public class MessageValidation : ObjetValeur
     {
-        public Erreur(string code) : base(code) { }
+        public MessageValidation(string code) : base(code) { }
 
-        public Erreur(string code, string messageParDéfaut) : base(code)
+        public MessageValidation(string code, string messageParDéfaut) : base(code)
         {
             MessageParDéfaut = messageParDéfaut;
         }
