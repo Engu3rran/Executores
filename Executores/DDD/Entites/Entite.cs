@@ -2,7 +2,7 @@
 
 namespace Executores
 {
-    public class Entite<T> : IEntite, IEnregistrable where T : IEntite
+    public abstract class Entite<T> : IEntite, IEnregistrable where T : IEntite
     {
         protected IEntrepotPersistance _entrepot = Fabrique.constuire<IEntrepotPersistance>();
 

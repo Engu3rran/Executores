@@ -3,7 +3,8 @@ namespace Executores
 {
     public enum TypeUtilisateur
     {
-        Huissier,
+        Anonyme,
+        Normal,
         Administrateur,
         Superviseur
     }

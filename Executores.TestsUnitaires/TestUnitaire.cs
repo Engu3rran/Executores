@@ -6,7 +6,7 @@ namespace Executores.TestsUnitaires
     public class TestUnitaire
     {
         [TestInitialize]
-        public void InitialiserLaFabrique()
+        public void initialiserLaFabrique()
         {
             Fabrique.configurerLInjectionDeDépendance(new ModuleInjectionTest());
         }

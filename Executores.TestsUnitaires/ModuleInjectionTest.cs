@@ -7,8 +7,6 @@ namespace Executores.TestsUnitaires
         public override void Load()
         {
             Bind<IEntrepotPersistance>().To<EntrepotPersistanceMock>().InSingletonScope();
-
-            Bind<Entreprise>().ToSelf();
         }
     }
 }

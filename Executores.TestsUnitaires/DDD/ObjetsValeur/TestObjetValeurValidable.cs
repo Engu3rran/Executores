@@ -6,31 +6,24 @@ namespace Executores.TestsUnitaires
     [TestClass]
     public class TestObjetValeurValidable
     {
-        private ObjetValeurValidable donnerUnMock(string valeur)
-        {
-            Mock<ObjetValeurValidable> mock = new Mock<ObjetValeurValidable>(valeur);
-            mock.CallBase = true;
-            return mock.Object;
-        }
-
         [TestMethod]
         public void TestObjetValeurValidable_unObjetValeurVideEstVide()
         {
-            ObjetValeurValidable objetValeur = donnerUnMock(null);
+            ObjetValeurValidable objetValeur = new ObjetValeurValidableMock(null);
             Assert.IsTrue(objetValeur.estVide());
         }
 
         [TestMethod]
         public void TestObjetValeurValidable_unObjetValeurRenseignéNEstPasVide()
         {
-            ObjetValeurValidable objetValeur = donnerUnMock("test");
+            ObjetValeurValidable objetValeur = new ObjetValeurValidableMock("test");
             Assert.IsFalse(objetValeur.estVide());
         }
 
         [TestMethod]
         public void TestObjetValeurValidable_unObjetValeurVideObligatoireEstInvalide()
         {
-            ObjetValeurValidable objetValeur = donnerUnMock(null);
+            ObjetValeurValidable objetValeur = new ObjetValeurValidableMock(null);
             objetValeur.rendreObligatoire();
             Assert.IsFalse(objetValeur.estValide());
         }
@@ -38,7 +31,7 @@ namespace Executores.TestsUnitaires
         [TestMethod]
         public void TestObjetValeurValidable_unObjetValeurVideFacultatifEstValide()
         {
-            ObjetValeurValidable objetValeur = donnerUnMock(null);
+            ObjetValeurValidable objetValeur = new ObjetValeurValidableMock(null);
             objetValeur.rendreFacultatif();
             Assert.IsTrue(objetValeur.estValide());
         }
@@ -46,7 +39,7 @@ namespace Executores.TestsUnitaires
         [TestMethod]
         public void TestObjetValeurValidable_unObjetValeurRenseignéObligatoireEstValide()
         {
-            ObjetValeurValidable objetValeur = donnerUnMock("test");
+            ObjetValeurValidable objetValeur = new ObjetValeurValidableMock("test");
             objetValeur.rendreObligatoire();
             Assert.IsTrue(objetValeur.estValide());
         }
@@ -54,7 +47,7 @@ namespace Executores.TestsUnitaires
         [TestMethod]
         public void TestObjetValeurValidable_unObjetValeurRenseignéFacultatifEstValide()
         {
-            ObjetValeurValidable objetValeur = donnerUnMock("test");
+            ObjetValeurValidable objetValeur = new ObjetValeurValidableMock("test");
             objetValeur.rendreFacultatif();
             Assert.IsTrue(objetValeur.estValide());
         }
@@ -62,7 +55,7 @@ namespace Executores.TestsUnitaires
         [TestMethod]
         public void TestObjetValeurValidable_unObjetValeurRenseignéAvecUneChaineTropLongueEstInvalide()
         {
-            ObjetValeurValidable objetValeur = donnerUnMock(TEST.CHAINEx257);
+            ObjetValeurValidable objetValeur = new ObjetValeurValidableMock(TEST.CHAINEx257);
             Assert.IsFalse(objetValeur.estValide());
         }
     }

@@ -5,6 +5,7 @@ namespace Executores
     {
         string AdresseEmail { get; }
         string MotDePasse { get; }
+        int TypeUtilisateur { get; }
         int Civilité { get; }
         string Nom { get; }
         string Prénom { get; }

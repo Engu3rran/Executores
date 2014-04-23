@@ -19,7 +19,7 @@ namespace Executores.TestsUnitaires
         public void TestEntrepotPersistanceMock_peutinsérerUnAgrégat()
         {
             int nombreInitial = _entrepot.prendreLaCollection<IEntite>().Count();
-            IEntite entité = Mock.Of<IEntite>();
+            IEntite entité = new EntiteMock();
             _entrepot.enregistrer<IEntite>(entité);
             int nombreFinal = _entrepot.prendreLaCollection<IEntite>().Count();
             Assert.AreEqual(nombreInitial + 1, nombreFinal);
@@ -29,7 +29,7 @@ namespace Executores.TestsUnitaires
         public void TestEntrepotPersistanceMock_peutModifierUnAgrégat()
         {
             int nombreInitial = _entrepot.prendreLaCollection<IEntite>().Count();
-            IEntite entité = Mock.Of<IEntite>();
+            IEntite entité = new EntiteMock();
             _entrepot.enregistrer<IEntite>(entité);
             _entrepot.enregistrer<IEntite>(entité);
             int nombreFinal = _entrepot.prendreLaCollection<IEntite>().Count();
@@ -41,7 +41,7 @@ namespace Executores.TestsUnitaires
         [TestMethod]
         public void TestEntrepotPersistanceMock_peutSupprimerUnAgrégat()
         {
-            IEntite entité = Mock.Of<IEntite>();
+            IEntite entité = new EntiteMock();
             _entrepot.enregistrer<IEntite>(entité);
             _entrepot.supprimer<IEntite>(entité);
             IEntite entitéRécupérée = _entrepot.prendreLaCollection<IEntite>().SingleOrDefault(x => x.Id == entité.Id);

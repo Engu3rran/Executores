@@ -4,10 +4,10 @@ namespace Executores
 {
     public class Utilisateur : Agregat<Utilisateur>
     {
-        public Utilisateur(IEntrepotPersistance entrepot) : base(entrepot)
+        public Utilisateur() : base()
         {
             Civilité = Civilite.Mademoiselle;
-            TypeUtilisateur = TypeUtilisateur.Huissier;
+            TypeUtilisateur = TypeUtilisateur.Anonyme;
         }
 
         public AdresseEmail AdresseEmail { get; set; }
@@ -23,10 +23,12 @@ namespace Executores
             AdresseEmail = new AdresseEmail(message.AdresseEmail);
             if (doitModifierLeMotDePasse(message))
                 MotDePasse = new MotDePasse(message.MotDePasse);
+            TypeUtilisateur = (TypeUtilisateur)message.TypeUtilisateur;
             Civilité = (Civilite)message.Civilité;
             Nom = new Nom(message.Nom);
             Prénom = new Prenom(message.Prénom);
-            Cabinet = _entrepot
+            if(TypeUtilisateur != TypeUtilisateur.Superviseur)
+                Cabinet = _entrepot
                 .prendreLaCollection<Entreprise>()
                 .Where(x => x is Cabinet)
                 .Cast<Cabinet>()
@@ -63,6 +65,18 @@ namespace Executores
             Utilisateur nouvelUtilisateur = Fabrique.constuire<Utilisateur>();
             nouvelUtilisateur.modifier(message);
             return nouvelUtilisateur;
+        }
+
+        public static bool authentifier(IAuthentificationMessage message)
+        {
+            AdresseEmail login = new AdresseEmail(message.Login);
+            MotDePasse motDePasse = new MotDePasse(message.MotDePasse);
+            return Fabrique.constuire<IEntrepotPersistance>()
+                .prendreLaCollection<Utilisateur>()
+                .Any(x =>
+                    x.DateArchivage == null
+                    && x.AdresseEmail == login
+                    && x.MotDePasse == motDePasse);
         }
     }
 }

@@ -18,5 +18,10 @@ namespace Executores.TestsUnitaires
 
         public static readonly EntrepriseMessageMock MESSAGE_ENTREPRISE_VIDE = new EntrepriseMessageMock();
         public static readonly EntrepriseMessageMock MESSAGE_ENTREPRISE_VALIDE = new EntrepriseMessageMock() { Nom = "Epsilone inc.", AdressePostale = MESSAGE_ADRESSE_POSTALE_VALIDE, NuméroSIRET = NUMERO_SIRET_VALIDE.ToString() };
+
+        public static readonly UtilisateurMessageMock UTILISATEUR_VIDE = new UtilisateurMessageMock();
+        public static readonly UtilisateurMessageMock UTILISATEUR_VALIDE = new UtilisateurMessageMock() { TypeUtilisateur = (int)TypeUtilisateur.Normal, MotDePasse = MOT_DE_PASSE_VALIDE.déchiffrer(), Civilité = (int)Civilite.Madame, Nom = "Pouet", Prénom = "Poulou", AdresseEmail = ADRESSE_EMAIL_VALIDE.ToString() };
+        public static readonly AuthentificationMessageMock AUTHENTIFIER_INVALIDE = new AuthentificationMessageMock();
+        public static readonly AuthentificationMessageMock AUTHENTIFIER_VALIDE = new AuthentificationMessageMock() { Login = ADRESSE_EMAIL_VALIDE.ToString(), MotDePasse = MOT_DE_PASSE_VALIDE.déchiffrer() };
     }
 }
