@@ -63,10 +63,14 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="DDD\Entrepots\EntrepotSessionMock.cs" />
+    <Compile Include="DDD\Entrepots\TestEntrepotSessionMock.cs" />
     <Compile Include="DDD\ObjetsValeur\TestObjetValeur.cs" />
     <Compile Include="DDD\ObjetsValeur\TestObjetValeurValidable.cs" />
     <Compile Include="Domaine\Adresses\TestCodePostal.cs" />
     <Compile Include="Domaine\Adresses\TestAdressePostale.cs" />
+    <Compile Include="Domaine\Clients\TestClientParticulier.cs" />
+    <Compile Include="Domaine\Clients\TestClientEntreprise.cs" />
     <Compile Include="Domaine\Entreprises\TestNumeroSIRET.cs" />
     <Compile Include="Domaine\Entreprises\TestEntreprise.cs" />
     <Compile Include="Domaine\Utilisateurs\TestMotDePasse.cs" />
@@ -74,7 +78,10 @@
     <Compile Include="Domaine\Utilisateurs\TestAdresseEmail.cs" />
     <Compile Include="Domaine\Utilisateurs\TestUtilisateur.cs" />
     <Compile Include="Mocks\Adresses\AdresseMessageMock.cs" />
+    <Compile Include="Mocks\Clients\ClientEntrepriseMessageMock.cs" />
+    <Compile Include="Mocks\Clients\ClientParticulierMessageMock.cs" />
     <Compile Include="Mocks\DDD\EntiteMock.cs" />
+    <Compile Include="Mocks\DDD\SessionHTTPMock.cs" />
     <Compile Include="Mocks\Entreprises\EntrepriseMessageMock.cs" />
     <Compile Include="Mocks\DDD\ObjetValeurMock.cs" />
     <Compile Include="Mocks\DDD\ObjetValeurValidableMock.cs" />

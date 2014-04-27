@@ -6,7 +6,12 @@ namespace Executores
     {
         private bool? _aUnNuméroSIRETDisponible;
 
-        public Entreprise() : base() { }
+        public Entreprise() : base() 
+        {
+            NuméroSIRET = new NumeroSIRET(null);
+            Dénomination = new Denomination(null);
+            AdressePostale = new AdressePostale();
+        }
 
         public NumeroSIRET NuméroSIRET {get; set;}
         public Denomination Dénomination { get; set; }
@@ -54,8 +59,15 @@ namespace Executores
             if (!aUnNuméroSIRETDisponible())
                 erreurs.ajouterUneErreur(VALIDATION.INDISPONIBLE_NUMERO_SIRET);
             erreurs.ajouterUneErreur(Dénomination.donnerLErreur());
-            erreurs.ajouterLesErreurs(AdressePostale.donnerLesErreurs());
+            erreurs.ajouterLesErreurs(AdressePostale.donnerLesMessagesDeValidation());
             return erreurs;
+        }
+
+        public static Entreprise créer(IEntrepriseMessage message)
+        {
+            Entreprise entreprise = new Entreprise();
+            entreprise.modifier(message);
+            return entreprise;
         }
     }
 }

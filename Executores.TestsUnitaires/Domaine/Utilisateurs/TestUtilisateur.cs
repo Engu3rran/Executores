@@ -19,20 +19,26 @@ namespace Executores.TestsUnitaires
         public void TestUtilisateur_uneAuthentificationAvecMauvaisLoginOuMotDePasseEstImpossible()
         {
             créerUnUtilisateur();
-            Assert.IsFalse(Utilisateur.authentifier(TEST.AUTHENTIFIER_INVALIDE));
+            Assert.IsFalse(Utilisateur.authentifier(TEST.MESSAGE_AUTHENTIFIER_INVALIDE));
+            SessionUtilisateur sessionEnCours = SessionUtilisateur.chargerLaSessionEnCours();
+            Assert.IsNotNull(sessionEnCours);
+            Assert.IsFalse(sessionEnCours.estAuthentifié());
         }
 
         [TestMethod]
         public void TestUtilisateur_uneAhtentificationAvecBonLoginEtMotDePasseRéussit()
         {
             créerUnUtilisateur();
-            Assert.IsTrue(Utilisateur.authentifier(TEST.AUTHENTIFIER_VALIDE));
+            Assert.IsTrue(Utilisateur.authentifier(TEST.MESSAGE_AUTHENTIFIER_VALIDE));
+            SessionUtilisateur sessionEnCours = SessionUtilisateur.chargerLaSessionEnCours();
+            Assert.IsNotNull(sessionEnCours);
+            Assert.IsTrue(sessionEnCours.estAuthentifié());
         }
 
         private Utilisateur créerUnUtilisateur()
         {
             Utilisateur utilisateur = new Utilisateur();
-            UtilisateurMessageMock message = TEST.UTILISATEUR_VALIDE;
+            UtilisateurMessageMock message = TEST.MESSAGE_UTILISATEUR_VALIDE;
             message.IdCabinet = _cabinet.Id.ToString();
             utilisateur.modifier(message);
             utilisateur.enregistrer();

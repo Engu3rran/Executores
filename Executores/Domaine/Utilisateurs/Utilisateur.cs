@@ -7,7 +7,7 @@ namespace Executores
         public Utilisateur() : base()
         {
             Civilité = Civilite.Mademoiselle;
-            TypeUtilisateur = TypeUtilisateur.Anonyme;
+            Type = TypeUtilisateur.Anonyme;
         }
 
         public AdresseEmail AdresseEmail { get; set; }
@@ -16,18 +16,18 @@ namespace Executores
         public Nom Nom { get; set; }
         public Prenom Prénom { get; set; }
         public Cabinet Cabinet { get; set; }
-        public TypeUtilisateur TypeUtilisateur { get; set; }
+        public TypeUtilisateur Type { get; set; }
 
         public void modifier(IUtilisateurMessage message)
         {
             AdresseEmail = new AdresseEmail(message.AdresseEmail);
             if (doitModifierLeMotDePasse(message))
                 MotDePasse = new MotDePasse(message.MotDePasse);
-            TypeUtilisateur = (TypeUtilisateur)message.TypeUtilisateur;
+            Type = (TypeUtilisateur)message.TypeUtilisateur;
             Civilité = (Civilite)message.Civilité;
             Nom = new Nom(message.Nom);
             Prénom = new Prenom(message.Prénom);
-            if(TypeUtilisateur != TypeUtilisateur.Superviseur)
+            if(Type != TypeUtilisateur.Superviseur)
                 Cabinet = _entrepot
                 .prendreLaCollection<Entreprise>()
                 .Where(x => x is Cabinet)
@@ -71,12 +71,21 @@ namespace Executores
         {
             AdresseEmail login = new AdresseEmail(message.Login);
             MotDePasse motDePasse = new MotDePasse(message.MotDePasse);
-            return Fabrique.constuire<IEntrepotPersistance>()
+            Utilisateur utilisateur = Fabrique.constuire<IEntrepotPersistance>()
                 .prendreLaCollection<Utilisateur>()
-                .Any(x =>
+                .SingleOrDefault(x =>
                     x.DateArchivage == null
                     && x.AdresseEmail == login
                     && x.MotDePasse == motDePasse);
+            if(utilisateur != null)
+            {
+                SessionUtilisateur session = new SessionUtilisateur();
+                session.IdUtilisateur = utilisateur.Id;
+                session.Type = utilisateur.Type;
+                session.connecter();
+                return true;
+            }
+            return false;
         }
     }
 }

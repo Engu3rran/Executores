@@ -5,11 +5,6 @@ namespace Executores
 {
     public abstract class Agregat<T> : Entite<T>, IAgregat, IValidable where T : IAgregat
     {
-        public Agregat(IEntrepotPersistance entrepot)
-        {
-            _entrepot = entrepot;
-        }
-
         public Agregat() : base() 
         {
             DateCréation = DateTime.Now;

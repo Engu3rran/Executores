@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
 
 namespace Executores.TestsUnitaires
 {
@@ -20,7 +19,7 @@ namespace Executores.TestsUnitaires
         {
             AdressePostale adressePostale = new AdressePostale();
             Assert.IsFalse(adressePostale.estValide());
-            ListeMessagesValidation erreurs = adressePostale.donnerLesErreurs();
+            ListeMessagesValidation erreurs = adressePostale.donnerLesMessagesDeValidation();
             Assert.AreEqual(3, erreurs.Count());
             Assert.IsTrue(erreurs.Any(x => x == VALIDATION.REQUIS_VOIE));
             Assert.IsTrue(erreurs.Any(x => x == VALIDATION.REQUIS_COMMUNE));
@@ -31,7 +30,7 @@ namespace Executores.TestsUnitaires
         {
             AdressePostale adressePostale = new AdressePostale() { Voie = TEST.CHAINEx257, Complément = TEST.CHAINEx257, CodePostal = TEST.CODE_POSTAL_VALIDE, Commune = TEST.CHAINEx257 };
             Assert.IsFalse(adressePostale.estValide());
-            ListeMessagesValidation erreurs = adressePostale.donnerLesErreurs();
+            ListeMessagesValidation erreurs = adressePostale.donnerLesMessagesDeValidation();
             Assert.AreEqual(3, erreurs.Count());
             Assert.IsTrue(erreurs.Any(x => x == VALIDATION.LONGUEUR_VOIE));
             Assert.IsTrue(erreurs.Any(x => x == VALIDATION.LONGUEUR_COMPLEMENT));

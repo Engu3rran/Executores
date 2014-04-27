@@ -2,7 +2,7 @@
 
 namespace Executores
 {
-    public class AdressePostale
+    public class AdressePostale : IValidable
     {
         public AdressePostale() 
         {
@@ -73,7 +73,7 @@ namespace Executores
                 || Commune.Length <= VALIDATION.CHAINE_LONGUEUR_MAX;
         }
 
-        public ListeMessagesValidation donnerLesErreurs()
+        public ListeMessagesValidation donnerLesMessagesDeValidation()
         {
             ListeMessagesValidation erreurs = new ListeMessagesValidation();
             donnerLesErreursDeLaVoie(erreurs);
